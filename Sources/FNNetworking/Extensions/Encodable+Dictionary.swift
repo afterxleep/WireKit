@@ -1,6 +1,6 @@
 //
 //  Encodable+Dictionary.swift
-//  FunctionalNetworking
+//  FNNetworking
 //
 //  Created by Daniel Bernal on 8/11/20.
 //

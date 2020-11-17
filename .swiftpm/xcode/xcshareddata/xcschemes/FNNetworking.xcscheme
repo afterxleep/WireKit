@@ -34,6 +34,20 @@
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FNNetworking"
+               BuildableName = "FNNetworking"
+               BlueprintName = "FNNetworking"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -50,6 +64,16 @@
                BlueprintIdentifier = "EasyNetowrkingTests"
                BuildableName = "EasyNetowrkingTests"
                BlueprintName = "EasyNetowrkingTests"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FNNetworkingTests"
+               BuildableName = "FNNetworkingTests"
+               BlueprintName = "FNNetworkingTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
