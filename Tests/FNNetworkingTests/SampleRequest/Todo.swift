@@ -6,7 +6,7 @@
 //
 
 import Foundation
-@testable import EasyNetowrking
+@testable import FNNetworking
 
 struct Todo: Codable {
     let userId: Int

@@ -7,7 +7,7 @@
 
 import XCTest
 import Combine
-@testable import EasyNetowrking
+@testable import FNNetworking
 
 final class FNRequestTests: XCTestCase {
     
