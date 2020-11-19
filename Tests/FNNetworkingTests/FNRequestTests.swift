@@ -11,51 +11,64 @@ import Combine
 
 final class FNRequestTests: XCTestCase {
     
-    static let testURL = "http://google.com"
-    static let testTodo = Todo(userId: 1, id: 1, title: "Testing 123", completed: true)
+    enum Constants {
+        static let testURL = "http://google.com"
+        static let getPath = "/todos/1"
+        static let postPath = "/todos"
+        static let testTodo = Todo(userId: 1, id: 1, title: "Testing 123", completed: true)
+        
+        enum TestData {
+            static let params1 = "param1=value1"
+            static let params2 = "param2=value2"
+            static let contentType = ("Content-Type", "application/json")
+            static let accept = ("Accept", "application/json")
+            static let header1 = ("header1", "value1")
+            static let header2 = ("header2", "value2")
+        }
+    }
     
     func testGetRequest() {
-        guard let requestCfg = Todo.API.FindById(1).asURLRequest(baseURL: Self.testURL) else {
+        guard let requestCfg = Todo.API.FindById(1).asURLRequest(baseURL: Constants.testURL) else {
             XCTFail()
             return
         }
         let url = requestURL(request: requestCfg)
         generalTests(url: url, request: requestCfg)
-        XCTAssertTrue(url.starts(with: "\(Self.testURL)/todos/1"))
+        XCTAssertTrue(url.starts(with: "\(Constants.testURL)\(Constants.getPath)"))
         XCTAssertTrue(HTTPMethod(rawValue: requestCfg.httpMethod ?? "") == HTTPMethod.get)
     }
     
     func testDeleteRequest() {
-        guard let request = Todo.API.Delete(Self.testTodo).asURLRequest(baseURL: Self.testURL) else {
+        guard let request = Todo.API.Delete(Constants.testTodo).asURLRequest(baseURL: Constants.testURL) else {
             XCTFail()
             return
         }
         let url = requestURL(request: request)
         generalTests(url: url, request: request)
-        XCTAssertTrue(url.starts(with: "\(Self.testURL)/todos/1"))
+        XCTAssertTrue(url.starts(with: "\(Constants.testURL)\(Constants.getPath)"))
         XCTAssertTrue(HTTPMethod(rawValue: request.httpMethod ?? "") == HTTPMethod.delete)
     }
     
     
     func testPostRequest() {
-        guard let request = Todo.API.Add(Self.testTodo).asURLRequest(baseURL: Self.testURL) else {
+        guard let request = Todo.API.Add(Constants.testTodo).asURLRequest(baseURL: Constants.testURL) else {
             XCTFail()
             return
         }
         let url = requestURL(request: request)
-        XCTAssertTrue(url.starts(with: "\(Self.testURL)/todos"))
+        XCTAssertTrue(url.starts(with: "\(Constants.testURL)\(Constants.postPath)"))
         XCTAssertTrue(HTTPMethod(rawValue: request.httpMethod ?? "") == HTTPMethod.post)
         bodyTests(request: request)
         generalTests(url: url, request: request)
     }
     
     func testPutRequest() {
-        guard let request = Todo.API.Update(Self.testTodo).asURLRequest(baseURL: Self.testURL) else {
+        guard let request = Todo.API.Update(Constants.testTodo).asURLRequest(baseURL: Constants.testURL) else {
             XCTFail()
             return
         }
         let url = requestURL(request: request)
-        XCTAssertTrue(url.starts(with: "\(Self.testURL)/todos"))
+        XCTAssertTrue(url.starts(with: "\(Constants.testURL)\(Constants.postPath)"))
         XCTAssertTrue(HTTPMethod(rawValue: request.httpMethod ?? "") == HTTPMethod.put)
         bodyTests(request: request)
         generalTests(url: url, request: request)
@@ -68,10 +81,10 @@ final class FNRequestTests: XCTestCase {
             return
         }
         let decodedBody = try? JSONDecoder().decode(Todo.self, from: requestBody)
-        XCTAssertTrue(decodedBody?.id == Self.testTodo.id)
-        XCTAssertTrue(decodedBody?.userId == Self.testTodo.userId)
-        XCTAssertTrue(decodedBody?.title == Self.testTodo.title)
-        XCTAssertTrue(decodedBody?.completed == Self.testTodo.completed)
+        XCTAssertTrue(decodedBody?.id == Constants.testTodo.id)
+        XCTAssertTrue(decodedBody?.userId == Constants.testTodo.userId)
+        XCTAssertTrue(decodedBody?.title == Constants.testTodo.title)
+        XCTAssertTrue(decodedBody?.completed == Constants.testTodo.completed)
     }
     
     private func requestURL(request: URLRequest) -> String {
@@ -79,12 +92,11 @@ final class FNRequestTests: XCTestCase {
     }
     
     private func generalTests(url: String, request: URLRequest) {
-        XCTAssertTrue(url.contains("param1=value1"))
-        XCTAssertTrue(url.contains("param2=value2"))
-        XCTAssertTrue(request.allHTTPHeaderFields?["Content-Type"] == "application/json")
-        XCTAssertTrue(request.allHTTPHeaderFields?["Accept"] == "application/json")
-        XCTAssertTrue(request.allHTTPHeaderFields?["Accept"] == "application/json")
-        XCTAssertTrue(request.allHTTPHeaderFields?["header1"] == "value1")
-        XCTAssertTrue(request.allHTTPHeaderFields?["header2"] == "value2")
+        XCTAssertTrue(url.contains(Constants.TestData.params1))
+        XCTAssertTrue(url.contains(Constants.TestData.params2))
+        XCTAssertTrue(request.allHTTPHeaderFields?[Constants.TestData.contentType.0] == Constants.TestData.contentType.1)
+        XCTAssertTrue(request.allHTTPHeaderFields?[Constants.TestData.accept.0] == Constants.TestData.accept.1)
+        XCTAssertTrue(request.allHTTPHeaderFields?[Constants.TestData.header1.0] == Constants.TestData.header1.1)
+        XCTAssertTrue(request.allHTTPHeaderFields?[Constants.TestData.header2.0] == Constants.TestData.header2.1)
     }
 }

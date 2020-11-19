@@ -23,10 +23,14 @@ enum NetworkRequestError: LocalizedError, Equatable {
 }
 
 struct FNNetworkDispatcher {
+        
+    let urlSession: URLSession!
     
-    func dispatch<ReturnType: Codable>(request: URLRequest,
-                                         decoder: JSONDecoder = JSONDecoder(),
-                                         urlSession: URLSession = URLSession.shared ) -> AnyPublisher<ReturnType, NetworkRequestError> {
+    init(urlSession: URLSession = URLSession.shared) {
+        self.urlSession = urlSession
+    }
+    
+    func dispatch<ReturnType: Codable>(request: URLRequest) -> AnyPublisher<ReturnType, NetworkRequestError> {
         
         return urlSession
             .dataTaskPublisher(for: request)

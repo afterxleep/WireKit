@@ -30,7 +30,7 @@ let package = Package(
         .testTarget(
             name: "FNNetworkingTests",
             dependencies: ["FNNetworking"],
-            resources: [.process("Resources/todos.json")]),
+            resources: [.process("Resources")]),
             
     ]
 )
