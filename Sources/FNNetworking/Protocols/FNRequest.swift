@@ -8,45 +8,45 @@
 import Foundation
 import Combine
 
-typealias HTTPParams = [String: Any]
-typealias HTTPHeaders = [String: String]
+public typealias FNHTTPParams = [String: Any]
+public typealias FNHTTPHeaders = [String: String]
 
-enum HTTPContentType: String {
+public enum FNHTTPContentType: String {
     case json = "application/json"
 }
 
-enum HTTPHeaderField: String {
+public enum FNHTTPHeaderField: String {
     case authentication = "Authorization"
     case contentType = "Content-Type"
     case acceptType = "Accept"
     case acceptEncoding = "Accept-Encoding"
 }
 
-enum HTTPMethod: String {
+public enum FNHTTPMethod: String {
     case get     = "GET"
     case post    = "POST"
     case put     = "PUT"
     case delete  = "DELETE"
 }
 
-protocol FNRequest {
+public protocol FNRequest {
     associatedtype ReturnType: Codable
     var path: String { get }
-    var method: HTTPMethod { get }
-    var contentType: HTTPContentType { get }
-    var params: HTTPParams? { get }
-    var body: HTTPParams? { get }
-    var headers: HTTPHeaders? { get }
+    var method: FNHTTPMethod { get }
+    var contentType: FNHTTPContentType { get }
+    var params: FNHTTPParams? { get }
+    var body: FNHTTPParams? { get }
+    var headers: FNHTTPHeaders? { get }
 }
  
 extension FNRequest {
     
     // Defaults
-    var method: HTTPMethod { return .get }
-    var contentType: HTTPContentType { return .json }
-    var params: HTTPParams? { return nil }
-    var body: HTTPParams? { return nil }
-    var headers: HTTPHeaders? { return nil }
+    var method: FNHTTPMethod { return .get }
+    var contentType: FNHTTPContentType { return .json }
+    var params: FNHTTPParams? { return nil }
+    var body: FNHTTPParams? { return nil }
+    var headers: FNHTTPHeaders? { return nil }
     
 }
 
@@ -56,7 +56,7 @@ extension FNRequest {
     /// Serializes an HTTP dictionary to a JSON Data Object
     /// - Parameter params: HTTP Parameters dictionary
     /// - Returns: Encoded JSON
-    private func requestBodyFrom(params: HTTPParams?) -> Data? {
+    private func requestBodyFrom(params: FNHTTPParams?) -> Data? {
         guard let params = params else { return nil }
         guard let httpBody = try? JSONSerialization.data(withJSONObject: params, options: []) else {
             return nil
@@ -68,7 +68,7 @@ extension FNRequest {
     /// Generates a URLQueryItems array from a Params dictionary
     /// - Parameter params: HTTP Parameters dictionary
     /// - Returns: An Array of URLQueryItems
-    private func queryItemsFrom(params: HTTPParams?) -> [URLQueryItem]? {
+    private func queryItemsFrom(params: FNHTTPParams?) -> [URLQueryItem]? {
         guard let params = params else { return nil }
         return params.map {
             URLQueryItem(name: $0.key, value: $0.value as? String)
@@ -86,9 +86,9 @@ extension FNRequest {
         var request = URLRequest(url: finalURL)
         request.httpMethod = method.rawValue
         request.httpBody = requestBodyFrom(params: body)
-        let defaultHeaders: HTTPHeaders = [
-            HTTPHeaderField.contentType.rawValue: contentType.rawValue,
-            HTTPHeaderField.acceptType.rawValue: contentType.rawValue
+        let defaultHeaders: FNHTTPHeaders = [
+            FNHTTPHeaderField.contentType.rawValue: contentType.rawValue,
+            FNHTTPHeaderField.acceptType.rawValue: contentType.rawValue
         ]
         request.allHTTPHeaderFields = defaultHeaders.merging(headers ?? [:], uniquingKeysWith: { (first, _) in first })
         return request

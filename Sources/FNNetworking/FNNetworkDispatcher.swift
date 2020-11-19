@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-enum FNNetworkRequestError: LocalizedError, Equatable {
+public enum FNNetworkRequestError: LocalizedError, Equatable {
     case invalidRequest
     case badRequest
     case unauthorized
@@ -22,7 +22,7 @@ enum FNNetworkRequestError: LocalizedError, Equatable {
     case unknownError
 }
 
-struct FNNetworkDispatcher {
+public struct FNNetworkDispatcher {
         
     let urlSession: URLSession!
     

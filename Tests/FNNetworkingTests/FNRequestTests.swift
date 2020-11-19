@@ -35,7 +35,7 @@ final class FNRequestTests: XCTestCase {
         let url = requestURL(request: requestCfg)
         generalTests(url: url, request: requestCfg)
         XCTAssertTrue(url.starts(with: "\(Constants.testURL)\(Constants.getPath)"))
-        XCTAssertTrue(HTTPMethod(rawValue: requestCfg.httpMethod ?? "") == HTTPMethod.get)
+        XCTAssertTrue(FNHTTPMethod(rawValue: requestCfg.httpMethod ?? "") == FNHTTPMethod.get)
     }
     
     func testDeleteRequest() {
@@ -46,7 +46,7 @@ final class FNRequestTests: XCTestCase {
         let url = requestURL(request: request)
         generalTests(url: url, request: request)
         XCTAssertTrue(url.starts(with: "\(Constants.testURL)\(Constants.getPath)"))
-        XCTAssertTrue(HTTPMethod(rawValue: request.httpMethod ?? "") == HTTPMethod.delete)
+        XCTAssertTrue(FNHTTPMethod(rawValue: request.httpMethod ?? "") == FNHTTPMethod.delete)
     }
     
     
@@ -57,7 +57,7 @@ final class FNRequestTests: XCTestCase {
         }
         let url = requestURL(request: request)
         XCTAssertTrue(url.starts(with: "\(Constants.testURL)\(Constants.postPath)"))
-        XCTAssertTrue(HTTPMethod(rawValue: request.httpMethod ?? "") == HTTPMethod.post)
+        XCTAssertTrue(FNHTTPMethod(rawValue: request.httpMethod ?? "") == FNHTTPMethod.post)
         bodyTests(request: request)
         generalTests(url: url, request: request)
     }
@@ -69,7 +69,7 @@ final class FNRequestTests: XCTestCase {
         }
         let url = requestURL(request: request)
         XCTAssertTrue(url.starts(with: "\(Constants.testURL)\(Constants.postPath)"))
-        XCTAssertTrue(HTTPMethod(rawValue: request.httpMethod ?? "") == HTTPMethod.put)
+        XCTAssertTrue(FNHTTPMethod(rawValue: request.httpMethod ?? "") == FNHTTPMethod.put)
         bodyTests(request: request)
         generalTests(url: url, request: request)
     }

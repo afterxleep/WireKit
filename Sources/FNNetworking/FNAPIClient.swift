@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-struct FNAPIClient {
+public struct FNAPIClient {
     
     var baseURL: String!
     var networkDispatcher: FNNetworkDispatcher!
