@@ -38,7 +38,6 @@ final class FNDispatcherTests: XCTestCase {
         let request = URLRequest(url: url)
         let pub: ArrayPublisher = dispatcher.dispatch(request: request)
          pub
-            .print()
             .sink(receiveCompletion: { _ in },
                   receiveValue: { value in
                     expectation.fulfill()

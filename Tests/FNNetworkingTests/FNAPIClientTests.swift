@@ -37,8 +37,7 @@ final class FNAPIClientTests: XCTestCase {
         let apiClient = FNAPIClient(baseURL: TestHelpers.URLs.baseURL, networkDispatcher: dispatcher)
         let expectation = XCTestExpectation(description: "Successful Data Load")
         let pub: ArrayPublisher = apiClient.dispatch(Todo.API.FindAll())
-         pub
-            .print()
+         pub            
             .sink(receiveCompletion: { _ in },
                   receiveValue: { value in
                     expectation.fulfill()
