@@ -51,7 +51,7 @@ public extension FNRequest {
 }
 
 // Utility Methods
-public extension FNRequest {
+extension FNRequest {
     
     /// Serializes an HTTP dictionary to a JSON Data Object
     /// - Parameter params: HTTP Parameters dictionary
