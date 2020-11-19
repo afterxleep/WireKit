@@ -1,5 +1,5 @@
 //
-//  APIClient.swift
+//  FNAPIClient.swift
 //  
 //
 //  Created by Daniel Bernal on 14/11/20.
@@ -19,9 +19,12 @@ struct FNAPIClient {
         self.networkDispatcher = networkDispatcher
     }
     
+    /// Dispatches an FNRequest and returns a publisher
+    /// - Parameter request: FNRequest to Dispatch
+    /// - Returns: A publisher containing decoded data or an error
     func dispatch<Request: FNRequest>(_ request: Request) -> AnyPublisher<Request.ReturnType, FNNetworkRequestError> {
         guard let urlRequest = request.asURLRequest(baseURL: baseURL) else {
-            return Fail(outputType: Request.ReturnType.self, failure: FNNetworkRequestError.badRequest).eraseToAnyPublisher()            
+            return Fail(outputType: Request.ReturnType.self, failure: FNNetworkRequestError.badRequest).eraseToAnyPublisher()
             
         }
         typealias Publisher = AnyPublisher<Request.ReturnType, FNNetworkRequestError>

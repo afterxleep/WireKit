@@ -1,5 +1,5 @@
 //
-//  NetworkDispatcher.swift
+//  FNNetworkDispatcher.swift
 //  
 //
 //  Created by Daniel Bernal on 15/11/20.
@@ -30,6 +30,9 @@ struct FNNetworkDispatcher {
         self.urlSession = urlSession
     }
     
+    /// Dispatches an URLRequest and returns a publisher
+    /// - Parameter request: URLRequest
+    /// - Returns: A publisher with the provided decoded data or an error
     func dispatch<ReturnType: Codable>(request: URLRequest) -> AnyPublisher<ReturnType, FNNetworkRequestError> {
         
         return urlSession
@@ -48,7 +51,10 @@ struct FNNetworkDispatcher {
             .eraseToAnyPublisher()
     }
     
-    // Common HTTP errors -> Handling
+    
+    /// Parses a HTTP StatusCode and returns a proper error
+    /// - Parameter statusCode: HTTP status code
+    /// - Returns: Mapped Error
     private func httpError(_ statusCode: Int) -> FNNetworkRequestError {
         switch statusCode {
             case 400: return .badRequest
@@ -62,7 +68,10 @@ struct FNNetworkDispatcher {
         }
     }
     
-    // Decoding & General Errors
+    
+    /// Parses URLSession Publisher errors and return proper ones
+    /// - Parameter error: URLSession publisher error
+    /// - Returns: Readable NFNNetworkRequestError
     private func handleError(error: Error) -> FNNetworkRequestError {
         switch error {
         case is Swift.DecodingError:

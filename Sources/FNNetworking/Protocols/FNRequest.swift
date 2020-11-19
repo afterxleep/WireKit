@@ -1,5 +1,5 @@
 //
-//  Request.swift
+//  FNRequest.swift
 //  FunctionalNetworking
 //
 //  Created by Daniel Bernal on 8/11/20.
@@ -53,6 +53,9 @@ extension FNRequest {
 // Utility Methods
 extension FNRequest {
     
+    /// Serializes an HTTP dictionary to a JSON Data Object
+    /// - Parameter params: HTTP Parameters dictionary
+    /// - Returns: Encoded JSON
     private func requestBodyFrom(params: HTTPParams?) -> Data? {
         guard let params = params else { return nil }
         guard let httpBody = try? JSONSerialization.data(withJSONObject: params, options: []) else {
@@ -61,6 +64,10 @@ extension FNRequest {
         return httpBody
     }
     
+    
+    /// Generates a URLQueryItems array from a Params dictionary
+    /// - Parameter params: HTTP Parameters dictionary
+    /// - Returns: An Array of URLQueryItems
     private func queryItemsFrom(params: HTTPParams?) -> [URLQueryItem]? {
         guard let params = params else { return nil }
         return params.map {
@@ -68,6 +75,9 @@ extension FNRequest {
         }
     }
     
+    /// Transforms an FNRequest into a standard URL request
+    /// - Parameter baseURL: API Base URL to be used
+    /// - Returns: A ready to use URLRequest
     func asURLRequest(baseURL: String) -> URLRequest? {
         guard var urlComponents = URLComponents(string: baseURL) else { return nil }
         urlComponents.path = "\(urlComponents.path)\(path)"

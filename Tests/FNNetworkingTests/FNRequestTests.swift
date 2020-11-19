@@ -1,5 +1,5 @@
 //
-//  APIRequestRests.swift
+//  FNRequestRests.swift
 //  FunctionalNetworking
 //
 //  Created by Daniel Bernal on 8/11/20.
