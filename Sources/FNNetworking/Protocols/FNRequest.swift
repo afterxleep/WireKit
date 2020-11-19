@@ -39,7 +39,7 @@ public protocol FNRequest {
     var headers: FNHTTPHeaders? { get }
 }
  
-extension FNRequest {
+public extension FNRequest {
     
     // Defaults
     var method: FNHTTPMethod { return .get }
@@ -51,7 +51,7 @@ extension FNRequest {
 }
 
 // Utility Methods
-extension FNRequest {
+public extension FNRequest {
     
     /// Serializes an HTTP dictionary to a JSON Data Object
     /// - Parameter params: HTTP Parameters dictionary
