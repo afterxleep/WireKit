@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-enum NetworkRequestError: LocalizedError, Equatable {
+enum FNNetworkRequestError: LocalizedError, Equatable {
     case invalidRequest
     case badRequest
     case unauthorized
@@ -30,7 +30,7 @@ struct FNNetworkDispatcher {
         self.urlSession = urlSession
     }
     
-    func dispatch<ReturnType: Codable>(request: URLRequest) -> AnyPublisher<ReturnType, NetworkRequestError> {
+    func dispatch<ReturnType: Codable>(request: URLRequest) -> AnyPublisher<ReturnType, FNNetworkRequestError> {
         
         return urlSession
             .dataTaskPublisher(for: request)
@@ -49,7 +49,7 @@ struct FNNetworkDispatcher {
     }
     
     // Common HTTP errors -> Handling
-    private func httpError(_ statusCode: Int) -> NetworkRequestError {
+    private func httpError(_ statusCode: Int) -> FNNetworkRequestError {
         switch statusCode {
             case 400: return .badRequest
             case 401: return .unauthorized
@@ -63,13 +63,13 @@ struct FNNetworkDispatcher {
     }
     
     // Decoding & General Errors
-    private func handleError(error: Error) -> NetworkRequestError {
+    private func handleError(error: Error) -> FNNetworkRequestError {
         switch error {
         case is Swift.DecodingError:
             return .decodingError
         case let urlError as URLError:
             return .urlSessionFailed(urlError)
-        case let error as NetworkRequestError:
+        case let error as FNNetworkRequestError:
             return error
         default:
             return .unknownError

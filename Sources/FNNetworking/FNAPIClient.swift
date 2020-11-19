@@ -13,16 +13,18 @@ struct FNAPIClient {
     var baseURL: String!
     var networkDispatcher: FNNetworkDispatcher!
     
-    init(baseURL: String, networkDispatcher: FNNetworkDispatcher = FNNetworkDispatcher()) {
+    init(baseURL: String,
+         networkDispatcher: FNNetworkDispatcher = FNNetworkDispatcher()) {
         self.baseURL = baseURL
         self.networkDispatcher = networkDispatcher
     }
     
-    func dispatch<Request: FNRequest>(_ request: Request) -> AnyPublisher<Request.ReturnType, NetworkRequestError> {
+    func dispatch<Request: FNRequest>(_ request: Request) -> AnyPublisher<Request.ReturnType, FNNetworkRequestError> {
         guard let urlRequest = request.asURLRequest(baseURL: baseURL) else {
-            fatalError("Could not create urlRequest")
+            return Fail(outputType: Request.ReturnType.self, failure: FNNetworkRequestError.badRequest).eraseToAnyPublisher()            
+            
         }
-        typealias Publisher = AnyPublisher<Request.ReturnType, NetworkRequestError>
+        typealias Publisher = AnyPublisher<Request.ReturnType, FNNetworkRequestError>
         let pub: Publisher = networkDispatcher.dispatch(request: urlRequest)
         return pub
             .eraseToAnyPublisher()

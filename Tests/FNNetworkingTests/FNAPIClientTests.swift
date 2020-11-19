@@ -12,7 +12,7 @@ import Combine
 final class FNAPIClientTests: XCTestCase {
     
     private var cancellables = [AnyCancellable]()
-    typealias ArrayPublisher = AnyPublisher<[Todo], NetworkRequestError>
+    typealias ArrayPublisher = AnyPublisher<[Todo], FNNetworkRequestError>
     
     func testRequest() {
         
@@ -40,7 +40,7 @@ final class FNAPIClientTests: XCTestCase {
          pub
             .print()
             .sink(receiveCompletion: { _ in },
-                  receiveValue: { value in                    
+                  receiveValue: { value in
                     expectation.fulfill()
                 })
             .store(in: &cancellables)

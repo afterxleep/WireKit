@@ -11,7 +11,7 @@ import Combine
 
 final class FNDispatcherTests: XCTestCase {
     
-    typealias ArrayPublisher = AnyPublisher<[Todo], NetworkRequestError>
+    typealias ArrayPublisher = AnyPublisher<[Todo], FNNetworkRequestError>
     private var cancellables = [AnyCancellable]()
     
     func testDispatcherSuccess() {
@@ -69,7 +69,7 @@ final class FNDispatcherTests: XCTestCase {
             .sink(receiveCompletion: { result in
                 switch result {
                 case .failure(let error):
-                    XCTAssertEqual(error, NetworkRequestError.notFound)
+                    XCTAssertEqual(error, FNNetworkRequestError.notFound)
                     expectation.fulfill()
                 default:
                     break
@@ -106,7 +106,7 @@ final class FNDispatcherTests: XCTestCase {
             .sink(receiveCompletion: { result in
                 switch result {
                 case .failure(let error):
-                    XCTAssertEqual(error, NetworkRequestError.decodingError)
+                    XCTAssertEqual(error, FNNetworkRequestError.decodingError)
                     expectation.fulfill()
                 default:
                     break
