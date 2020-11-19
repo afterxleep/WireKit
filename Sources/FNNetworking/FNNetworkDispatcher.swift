@@ -26,14 +26,14 @@ public struct FNNetworkDispatcher {
         
     let urlSession: URLSession!
     
-    init(urlSession: URLSession = URLSession.shared) {
+    public init(urlSession: URLSession = URLSession.shared) {
         self.urlSession = urlSession
     }
     
     /// Dispatches an URLRequest and returns a publisher
     /// - Parameter request: URLRequest
     /// - Returns: A publisher with the provided decoded data or an error
-    func dispatch<ReturnType: Codable>(request: URLRequest) -> AnyPublisher<ReturnType, FNNetworkRequestError> {
+    public func dispatch<ReturnType: Codable>(request: URLRequest) -> AnyPublisher<ReturnType, FNNetworkRequestError> {
         
         return urlSession
             .dataTaskPublisher(for: request)

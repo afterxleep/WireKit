@@ -10,10 +10,10 @@ import Combine
 
 public struct FNAPIClient {
     
-    var baseURL: String!
-    var networkDispatcher: FNNetworkDispatcher!
+    public var baseURL: String!
+    public var networkDispatcher: FNNetworkDispatcher!
     
-    init(baseURL: String,
+    public init(baseURL: String,
          networkDispatcher: FNNetworkDispatcher = FNNetworkDispatcher()) {
         self.baseURL = baseURL
         self.networkDispatcher = networkDispatcher
@@ -22,7 +22,7 @@ public struct FNAPIClient {
     /// Dispatches an FNRequest and returns a publisher
     /// - Parameter request: FNRequest to Dispatch
     /// - Returns: A publisher containing decoded data or an error
-    func dispatch<Request: FNRequest>(_ request: Request) -> AnyPublisher<Request.ReturnType, FNNetworkRequestError> {
+    public func dispatch<Request: FNRequest>(_ request: Request) -> AnyPublisher<Request.ReturnType, FNNetworkRequestError> {
         guard let urlRequest = request.asURLRequest(baseURL: baseURL) else {
             return Fail(outputType: Request.ReturnType.self, failure: FNNetworkRequestError.badRequest).eraseToAnyPublisher()
             
