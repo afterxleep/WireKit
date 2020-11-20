@@ -1,9 +1,12 @@
 //
 //  FNRequestRests.swift
-//  FunctionalNetworking
+//  FNNetworking
 //
 //  Created by Daniel Bernal on 8/11/20.
+//  © 2020 - Les Mobiles
+//  MIT License
 //
+
 
 import XCTest
 import Combine

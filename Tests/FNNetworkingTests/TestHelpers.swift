@@ -1,9 +1,12 @@
 //
 //  TestHelpers.swift
-//  
+//  FNNetworking
 //
 //  Created by Daniel Bernal on 18/11/20.
+//  © 2020 - Les Mobiles
+//  MIT License
 //
+
 
 import XCTest
 import Foundation
@@ -11,8 +14,8 @@ import Foundation
 struct TestHelpers {
     
     enum TestPaths: String {
-        case todos = "todos"
-        case todo = "todo"
+        case todos
+        case todo
     }
     
     enum URLs {
@@ -28,14 +31,12 @@ struct TestHelpers {
     
     static func loadTestData(from data: TestPaths) -> Data? {
         guard let path = Bundle.module.path(forResource: data.rawValue, ofType: "json") else {
-            XCTFail()
             return nil
         }
         do {
-              let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                return data
+            return try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
           } catch {
-               return nil
+            return nil
           }
     }
     

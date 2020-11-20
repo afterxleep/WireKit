@@ -3,7 +3,10 @@
 //  
 //
 //  Created by Daniel Bernal on 14/11/20.
+//  © 2020 - Les Mobiles
+//  MIT License
 //
+
 
 import Foundation
 import Combine
@@ -14,7 +17,7 @@ public struct FNAPIClient {
     public var networkDispatcher: FNNetworkDispatcher!
     
     public init(baseURL: String,
-         networkDispatcher: FNNetworkDispatcher = FNNetworkDispatcher()) {
+                networkDispatcher: FNNetworkDispatcher = FNNetworkDispatcher()) {
         self.baseURL = baseURL
         self.networkDispatcher = networkDispatcher
     }
@@ -29,7 +32,6 @@ public struct FNAPIClient {
         }
         typealias Publisher = AnyPublisher<Request.ReturnType, FNNetworkRequestError>
         let pub: Publisher = networkDispatcher.dispatch(request: urlRequest)
-        return pub
-            .eraseToAnyPublisher()
+        return pub.eraseToAnyPublisher()
     }
 }

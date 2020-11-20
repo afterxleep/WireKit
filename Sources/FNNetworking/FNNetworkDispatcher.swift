@@ -3,7 +3,10 @@
 //  
 //
 //  Created by Daniel Bernal on 15/11/20.
+//  © 2020 - Les Mobiles
+//  MIT License
 //
+
 
 import Combine
 import Foundation
@@ -26,7 +29,7 @@ public struct FNNetworkDispatcher {
         
     let urlSession: URLSession!
     
-    public init(urlSession: URLSession = URLSession.shared) {
+    public init(urlSession: URLSession = .shared) {
         self.urlSession = urlSession
     }
     
@@ -46,7 +49,7 @@ public struct FNNetworkDispatcher {
             })
             .decode(type: ReturnType.self, decoder: JSONDecoder())
             .mapError { error in
-               handleError(error: error)
+               handleError(error)
             }
             .eraseToAnyPublisher()
     }
@@ -72,7 +75,7 @@ public struct FNNetworkDispatcher {
     /// Parses URLSession Publisher errors and return proper ones
     /// - Parameter error: URLSession publisher error
     /// - Returns: Readable NFNNetworkRequestError
-    private func handleError(error: Error) -> FNNetworkRequestError {
+    private func handleError(_ error: Error) -> FNNetworkRequestError {
         switch error {
         case is Swift.DecodingError:
             return .decodingError

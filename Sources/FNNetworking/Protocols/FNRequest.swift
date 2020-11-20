@@ -3,6 +3,8 @@
 //  FunctionalNetworking
 //
 //  Created by Daniel Bernal on 8/11/20.
+//  © 2020 - Les Mobiles
+//  MIT License
 //
 
 import Foundation
@@ -34,7 +36,7 @@ public protocol FNRequest {
     var path: String { get }
     var method: FNHTTPMethod { get }
     var contentType: FNHTTPContentType { get }
-    var params: FNHTTPParams? { get }
+    var queryParams: FNHTTPParams? { get }
     var body: FNHTTPParams? { get }
     var headers: FNHTTPHeaders? { get }
 }
@@ -44,7 +46,7 @@ public extension FNRequest {
     // Defaults
     var method: FNHTTPMethod { return .get }
     var contentType: FNHTTPContentType { return .json }
-    var params: FNHTTPParams? { return nil }
+    var queryParams: FNHTTPParams? { return nil }
     var body: FNHTTPParams? { return nil }
     var headers: FNHTTPHeaders? { return nil }
     
@@ -81,7 +83,7 @@ extension FNRequest {
     func asURLRequest(baseURL: String) -> URLRequest? {
         guard var urlComponents = URLComponents(string: baseURL) else { return nil }
         urlComponents.path = "\(urlComponents.path)\(path)"
-        urlComponents.queryItems = queryItemsFrom(params: params)
+        urlComponents.queryItems = queryItemsFrom(params: queryParams)
         guard let finalURL = urlComponents.url else { return nil }
         var request = URLRequest(url: finalURL)
         request.httpMethod = method.rawValue

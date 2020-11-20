@@ -1,9 +1,12 @@
 //
 //  FNSessionDispatcherTests.swift
-//  
+//  FNNetworking
 //
 //  Created by Daniel Bernal on 16/11/20.
+//  © 2020 - Les Mobiles
+//  MIT License
 //
+
 
 import XCTest
 import Combine
@@ -21,7 +24,7 @@ final class FNDispatcherTests: XCTestCase {
             XCTFail()
             return
         }
-        guard let testData: Data = TestHelpers.loadTestData(from: TestHelpers.TestPaths.todos) else {
+        guard let testData = TestHelpers.loadTestData(from: TestHelpers.TestPaths.todos) else {
             XCTFail()
             return
         }
@@ -37,9 +40,8 @@ final class FNDispatcherTests: XCTestCase {
         let dispatcher = FNNetworkDispatcher(urlSession: TestHelpers.DummyURLSession())
         let request = URLRequest(url: url)
         let pub: ArrayPublisher = dispatcher.dispatch(request: request)
-         pub
-            .sink(receiveCompletion: { _ in },
-                  receiveValue: { value in
+        pub.sink(receiveCompletion: { _ in },
+                 receiveValue: { value in
                     expectation.fulfill()
                 })
             .store(in: &cancellables)
@@ -64,9 +66,8 @@ final class FNDispatcherTests: XCTestCase {
         let dispatcher = FNNetworkDispatcher(urlSession: TestHelpers.DummyURLSession())
         let request = URLRequest(url: url)
         let pub: ArrayPublisher = dispatcher.dispatch(request: request)
-         pub
-            .sink(receiveCompletion: { result in
-                switch result {
+        pub.sink(receiveCompletion: { result in
+            switch result {
                 case .failure(let error):
                     XCTAssertEqual(error, FNNetworkRequestError.notFound)
                     expectation.fulfill()
@@ -74,8 +75,8 @@ final class FNDispatcherTests: XCTestCase {
                     break
                 }
             },
-              receiveValue: {_ in })
-            .store(in: &cancellables)
+            receiveValue: {_ in })
+        .store(in: &cancellables)
         wait(for: [expectation], timeout: TestHelpers.HTTPSettings.requestTimeout)
     }
     
@@ -86,7 +87,7 @@ final class FNDispatcherTests: XCTestCase {
             return
         }
         
-        guard let testData: Data = TestHelpers.loadTestData(from: TestHelpers.TestPaths.todo) else {
+        guard let testData = TestHelpers.loadTestData(from: TestHelpers.TestPaths.todo) else {
             XCTFail()
             return
         }
@@ -101,8 +102,7 @@ final class FNDispatcherTests: XCTestCase {
         let dispatcher = FNNetworkDispatcher(urlSession: TestHelpers.DummyURLSession())
         let request = URLRequest(url: url)
         let pub: ArrayPublisher = dispatcher.dispatch(request: request)
-         pub
-            .sink(receiveCompletion: { result in
+        pub.sink(receiveCompletion: { result in
                 switch result {
                 case .failure(let error):
                     XCTAssertEqual(error, FNNetworkRequestError.decodingError)
@@ -111,8 +111,8 @@ final class FNDispatcherTests: XCTestCase {
                     break
                 }
             },
-              receiveValue: {_ in })
-            .store(in: &cancellables)
+            receiveValue: {_ in })
+        .store(in: &cancellables)
         wait(for: [expectation], timeout: TestHelpers.HTTPSettings.requestTimeout)
     }
 }

@@ -1,13 +1,16 @@
 //
 //  URLProtocolMock.swift
-//  
+//  FNNetworking
 //
 //  Created by Daniel Bernal on 16/11/20.
+//  © 2020 - Les Mobiles
+//  MIT License
 //
+
 
 import Foundation
 
-class URLProtocolMock: URLProtocol {
+final class URLProtocolMock: URLProtocol {
     
     static var requestHandler: ((URLRequest) throws -> (HTTPURLResponse, Data))?
     
@@ -29,10 +32,8 @@ class URLProtocolMock: URLProtocol {
         } catch  {
             client?.urlProtocol(self, didFailWithError: error)
         }
-        
-        self.client?.urlProtocolDidFinishLoading(self)
+        client?.urlProtocolDidFinishLoading(self)
     }
-    
-    
+
     override func stopLoading() { }
 }

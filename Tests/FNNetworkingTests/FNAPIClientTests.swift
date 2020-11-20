@@ -1,9 +1,12 @@
 //
 //  FNAPIClientTests.swift
-//  
+//  FNNetworking
 //
 //  Created by Daniel Bernal on 18/11/20.
+//  © 2020 - Les Mobiles
+//  MIT License
 //
+
 
 import XCTest
 import Combine
@@ -16,7 +19,7 @@ final class FNAPIClientTests: XCTestCase {
     
     func testRequest() {
         
-        guard let testData: Data = TestHelpers.loadTestData(from: TestHelpers.TestPaths.todos) else {
+        guard let testData = TestHelpers.loadTestData(from: TestHelpers.TestPaths.todos) else {
             XCTFail()
             return
         }
