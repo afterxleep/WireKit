@@ -1,5 +1,5 @@
 //
-//  FNNetworkDispatcher.swift
+//  WKNetworkDispatcher.swift
 //  
 //
 //  Created by Daniel Bernal on 15/11/20.
@@ -11,7 +11,7 @@
 import Combine
 import Foundation
 
-public enum FNNetworkRequestError: LocalizedError, Equatable {
+public enum WKNetworkRequestError: LocalizedError, Equatable {
     case invalidRequest
     case badRequest
     case unauthorized
@@ -25,7 +25,7 @@ public enum FNNetworkRequestError: LocalizedError, Equatable {
     case unknownError
 }
 
-public struct FNNetworkDispatcher {
+public struct WKNetworkDispatcher {
         
     let urlSession: URLSession!
     
@@ -36,7 +36,7 @@ public struct FNNetworkDispatcher {
     /// Dispatches an URLRequest and returns a publisher
     /// - Parameter request: URLRequest
     /// - Returns: A publisher with the provided decoded data or an error
-    public func dispatch<ReturnType: Codable>(request: URLRequest) -> AnyPublisher<ReturnType, FNNetworkRequestError> {
+    public func dispatch<ReturnType: Codable>(request: URLRequest) -> AnyPublisher<ReturnType, WKNetworkRequestError> {
         
         return urlSession
             .dataTaskPublisher(for: request)
@@ -58,7 +58,7 @@ public struct FNNetworkDispatcher {
     /// Parses a HTTP StatusCode and returns a proper error
     /// - Parameter statusCode: HTTP status code
     /// - Returns: Mapped Error
-    private func httpError(_ statusCode: Int) -> FNNetworkRequestError {
+    private func httpError(_ statusCode: Int) -> WKNetworkRequestError {
         switch statusCode {
             case 400: return .badRequest
             case 401: return .unauthorized
@@ -74,14 +74,14 @@ public struct FNNetworkDispatcher {
     
     /// Parses URLSession Publisher errors and return proper ones
     /// - Parameter error: URLSession publisher error
-    /// - Returns: Readable NFNNetworkRequestError
-    private func handleError(_ error: Error) -> FNNetworkRequestError {
+    /// - Returns: Readable NWKNetworkRequestError
+    private func handleError(_ error: Error) -> WKNetworkRequestError {
         switch error {
         case is Swift.DecodingError:
             return .decodingError
         case let urlError as URLError:
             return .urlSessionFailed(urlError)
-        case let error as FNNetworkRequestError:
+        case let error as WKNetworkRequestError:
             return error
         default:
             return .unknownError

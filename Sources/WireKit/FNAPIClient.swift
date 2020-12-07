@@ -1,5 +1,5 @@
 //
-//  FNAPIClient.swift
+//  WKAPIClient.swift
 //  
 //
 //  Created by Daniel Bernal on 14/11/20.
@@ -11,26 +11,26 @@
 import Foundation
 import Combine
 
-public struct FNAPIClient {
+public struct WKAPIClient {
     
     public var baseURL: String!
-    public var networkDispatcher: FNNetworkDispatcher!
+    public var networkDispatcher: WKNetworkDispatcher!
     
     public init(baseURL: String,
-                networkDispatcher: FNNetworkDispatcher = FNNetworkDispatcher()) {
+                networkDispatcher: WKNetworkDispatcher = WKNetworkDispatcher()) {
         self.baseURL = baseURL
         self.networkDispatcher = networkDispatcher
     }
     
-    /// Dispatches an FNRequest and returns a publisher
-    /// - Parameter request: FNRequest to Dispatch
+    /// Dispatches an WKRequest and returns a publisher
+    /// - Parameter request: WKRequest to Dispatch
     /// - Returns: A publisher containing decoded data or an error
-    public func dispatch<Request: FNRequest>(_ request: Request) -> AnyPublisher<Request.ReturnType, FNNetworkRequestError> {
+    public func dispatch<Request: WKRequest>(_ request: Request) -> AnyPublisher<Request.ReturnType, WKNetworkRequestError> {
         guard let urlRequest = request.asURLRequest(baseURL: baseURL) else {
-            return Fail(outputType: Request.ReturnType.self, failure: FNNetworkRequestError.badRequest).eraseToAnyPublisher()
+            return Fail(outputType: Request.ReturnType.self, failure: WKNetworkRequestError.badRequest).eraseToAnyPublisher()
             
         }
-        typealias Publisher = AnyPublisher<Request.ReturnType, FNNetworkRequestError>
+        typealias Publisher = AnyPublisher<Request.ReturnType, WKNetworkRequestError>
         let pub: Publisher = networkDispatcher.dispatch(request: urlRequest)
         return pub.eraseToAnyPublisher()
     }
