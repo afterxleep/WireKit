@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "WireKit",
+        "repositoryURL": "https://github.com/Les-Mobiles/WireKit",
+        "state": {
+          "branch": "main",
+          "revision": "a494801aa8bf66767f7c2ffe5546778a8885d97f",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
