@@ -1,6 +1,6 @@
 //
 //  Encodable+Dictionary.swift
-//  FNNetworking
+//  WireKit
 //
 //  Created by Daniel Bernal on 8/11/20.
 //  © 2020 - Les Mobiles

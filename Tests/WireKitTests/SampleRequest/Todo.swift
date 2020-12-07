@@ -1,6 +1,6 @@
 //
 //  Todo.swift
-//  FNNetworking
+//  WireKit
 //
 //  Created by Daniel Bernal on 8/11/20.
 //  © 2020 - Les Mobiles
@@ -9,7 +9,7 @@
 
 
 import Foundation
-@testable import FNNetworking
+@testable import WireKit
 
 struct Todo: Codable {
     let userId: Int
@@ -24,56 +24,56 @@ struct Todo: Codable {
             static var queryParams = ["param1": "value1", "param2": "value2"]
         }
             
-        struct FindAll: FNRequest {
+        struct FindAll: WKRequest {
             typealias ReturnType = [Todo]
             var path: String = APIConstants.path
-            var headers: FNHTTPHeaders? = APIConstants.headers
-            var queryParams: FNHTTPParams? = APIConstants.queryParams
+            var headers: WKHTTPHeaders? = APIConstants.headers
+            var queryParams: WKHTTPParams? = APIConstants.queryParams
         }
         
-        struct FindById: FNRequest {
+        struct FindById: WKRequest {
             typealias ReturnType = [Todo]
             var path: String
-            var headers: FNHTTPHeaders? = APIConstants.headers
-            var queryParams: FNHTTPParams? = APIConstants.queryParams
+            var headers: WKHTTPHeaders? = APIConstants.headers
+            var queryParams: WKHTTPParams? = APIConstants.queryParams
             
             init(_ id: Int) {
                 path = "\(APIConstants.path)/\(id)"
             }
         }
         
-        struct Add: FNRequest {
+        struct Add: WKRequest {
             typealias ReturnType = Todo
             var path: String = APIConstants.path
-            var body: FNHTTPParams?
-            var method: FNHTTPMethod = .post
-            var headers: FNHTTPHeaders? = APIConstants.headers
-            var queryParams: FNHTTPParams? = APIConstants.queryParams
+            var body: WKHTTPParams?
+            var method: WKHTTPMethod = .post
+            var headers: WKHTTPHeaders? = APIConstants.headers
+            var queryParams: WKHTTPParams? = APIConstants.queryParams
             
             init(_ todo: Todo) {
                 body = todo.asDictionary
             }
         }
         
-        struct Delete: FNRequest {
+        struct Delete: WKRequest {
             typealias ReturnType = Todo
             var path: String
-            var method: FNHTTPMethod = .delete
-            var headers: FNHTTPHeaders? = APIConstants.headers
-            var queryParams: FNHTTPParams? = APIConstants.queryParams
+            var method: WKHTTPMethod = .delete
+            var headers: WKHTTPHeaders? = APIConstants.headers
+            var queryParams: WKHTTPParams? = APIConstants.queryParams
             
             init(_ todo: Todo) {
                 path = "\(APIConstants.path)/\(todo.id)"
             }
         }
         
-        struct Update: FNRequest {
+        struct Update: WKRequest {
             typealias ReturnType = Todo
             var path: String = APIConstants.path
-            var body: FNHTTPParams?
-            var method: FNHTTPMethod = .put
-            var headers: FNHTTPHeaders? = APIConstants.headers
-            var queryParams: FNHTTPParams? = APIConstants.queryParams
+            var body: WKHTTPParams?
+            var method: WKHTTPMethod = .put
+            var headers: WKHTTPHeaders? = APIConstants.headers
+            var queryParams: WKHTTPParams? = APIConstants.queryParams
             
             init(_ todo: Todo) {
                 path = "\(APIConstants.path)/\(todo.id)"

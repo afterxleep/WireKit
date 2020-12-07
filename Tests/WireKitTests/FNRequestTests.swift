@@ -1,6 +1,6 @@
 //
-//  FNRequestRests.swift
-//  FNNetworking
+//  WKRequestRests.swift
+//  WireKit
 //
 //  Created by Daniel Bernal on 8/11/20.
 //  © 2020 - Les Mobiles
@@ -10,9 +10,9 @@
 
 import XCTest
 import Combine
-@testable import FNNetworking
+@testable import WireKit
 
-final class FNRequestTests: XCTestCase {
+final class WKRequestTests: XCTestCase {
     
     enum Constants {
         static let testURL = "http://google.com"
@@ -38,7 +38,7 @@ final class FNRequestTests: XCTestCase {
         let url = requestURL(request: requestCfg)
         generalTests(url: url, request: requestCfg)
         XCTAssertTrue(url.starts(with: "\(Constants.testURL)\(Constants.getPath)"))
-        XCTAssertTrue(FNHTTPMethod(rawValue: requestCfg.httpMethod ?? "") == FNHTTPMethod.get)
+        XCTAssertTrue(WKHTTPMethod(rawValue: requestCfg.httpMethod ?? "") == WKHTTPMethod.get)
     }
     
     func testDeleteRequest() {
@@ -49,7 +49,7 @@ final class FNRequestTests: XCTestCase {
         let url = requestURL(request: request)
         generalTests(url: url, request: request)
         XCTAssertTrue(url.starts(with: "\(Constants.testURL)\(Constants.getPath)"))
-        XCTAssertTrue(FNHTTPMethod(rawValue: request.httpMethod ?? "") == FNHTTPMethod.delete)
+        XCTAssertTrue(WKHTTPMethod(rawValue: request.httpMethod ?? "") == WKHTTPMethod.delete)
     }
     
     
@@ -60,7 +60,7 @@ final class FNRequestTests: XCTestCase {
         }
         let url = requestURL(request: request)
         XCTAssertTrue(url.starts(with: "\(Constants.testURL)\(Constants.postPath)"))
-        XCTAssertTrue(FNHTTPMethod(rawValue: request.httpMethod ?? "") == FNHTTPMethod.post)
+        XCTAssertTrue(WKHTTPMethod(rawValue: request.httpMethod ?? "") == WKHTTPMethod.post)
         bodyTests(request: request)
         generalTests(url: url, request: request)
     }
@@ -72,7 +72,7 @@ final class FNRequestTests: XCTestCase {
         }
         let url = requestURL(request: request)
         XCTAssertTrue(url.starts(with: "\(Constants.testURL)\(Constants.postPath)"))
-        XCTAssertTrue(FNHTTPMethod(rawValue: request.httpMethod ?? "") == FNHTTPMethod.put)
+        XCTAssertTrue(WKHTTPMethod(rawValue: request.httpMethod ?? "") == WKHTTPMethod.put)
         bodyTests(request: request)
         generalTests(url: url, request: request)
     }

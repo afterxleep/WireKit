@@ -1,6 +1,6 @@
 //
-//  FNAPIClientTests.swift
-//  FNNetworking
+//  WKAPIClientTests.swift
+//  WireKit
 //
 //  Created by Daniel Bernal on 18/11/20.
 //  © 2020 - Les Mobiles
@@ -10,12 +10,12 @@
 
 import XCTest
 import Combine
-@testable import FNNetworking
+@testable import WireKit
 
-final class FNAPIClientTests: XCTestCase {
+final class WKAPIClientTests: XCTestCase {
     
     private var cancellables = [AnyCancellable]()
-    typealias ArrayPublisher = AnyPublisher<[Todo], FNNetworkRequestError>
+    typealias ArrayPublisher = AnyPublisher<[Todo], WKNetworkRequestError>
     
     func testRequest() {
         
@@ -36,8 +36,8 @@ final class FNAPIClientTests: XCTestCase {
                                                 headerFields: nil)!
             return (response, testData)
         }
-        let dispatcher = FNNetworkDispatcher(urlSession: TestHelpers.DummyURLSession())
-        let apiClient = FNAPIClient(baseURL: TestHelpers.URLs.baseURL, networkDispatcher: dispatcher)
+        let dispatcher = WKNetworkDispatcher(urlSession: TestHelpers.DummyURLSession())
+        let apiClient = WKAPIClient(baseURL: TestHelpers.URLs.baseURL, networkDispatcher: dispatcher)
         let expectation = XCTestExpectation(description: "Successful Data Load")
         let pub: ArrayPublisher = apiClient.dispatch(Todo.API.FindAll())
          pub            

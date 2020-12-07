@@ -1,5 +1,5 @@
 //
-//  FNRequest.swift
+//  WKRequest.swift
 //  FunctionalNetworking
 //
 //  Created by Daniel Bernal on 8/11/20.
@@ -10,55 +10,55 @@
 import Foundation
 import Combine
 
-public typealias FNHTTPParams = [String: Any]
-public typealias FNHTTPHeaders = [String: String]
+public typealias WKHTTPParams = [String: Any]
+public typealias WKHTTPHeaders = [String: String]
 
-public enum FNHTTPContentType: String {
+public enum WKHTTPContentType: String {
     case json = "application/json"
 }
 
-public enum FNHTTPHeaderField: String {
+public enum WKHTTPHeaderField: String {
     case authentication = "Authorization"
     case contentType = "Content-Type"
     case acceptType = "Accept"
     case acceptEncoding = "Accept-Encoding"
 }
 
-public enum FNHTTPMethod: String {
+public enum WKHTTPMethod: String {
     case get     = "GET"
     case post    = "POST"
     case put     = "PUT"
     case delete  = "DELETE"
 }
 
-public protocol FNRequest {
+public protocol WKRequest {
     associatedtype ReturnType: Codable
     var path: String { get }
-    var method: FNHTTPMethod { get }
-    var contentType: FNHTTPContentType { get }
-    var queryParams: FNHTTPParams? { get }
-    var body: FNHTTPParams? { get }
-    var headers: FNHTTPHeaders? { get }
+    var method: WKHTTPMethod { get }
+    var contentType: WKHTTPContentType { get }
+    var queryParams: WKHTTPParams? { get }
+    var body: WKHTTPParams? { get }
+    var headers: WKHTTPHeaders? { get }
 }
  
-public extension FNRequest {
+public extension WKRequest {
     
     // Defaults
-    var method: FNHTTPMethod { return .get }
-    var contentType: FNHTTPContentType { return .json }
-    var queryParams: FNHTTPParams? { return nil }
-    var body: FNHTTPParams? { return nil }
-    var headers: FNHTTPHeaders? { return nil }
+    var method: WKHTTPMethod { return .get }
+    var contentType: WKHTTPContentType { return .json }
+    var queryParams: WKHTTPParams? { return nil }
+    var body: WKHTTPParams? { return nil }
+    var headers: WKHTTPHeaders? { return nil }
     
 }
 
 // Utility Methods
-extension FNRequest {
+extension WKRequest {
     
     /// Serializes an HTTP dictionary to a JSON Data Object
     /// - Parameter params: HTTP Parameters dictionary
     /// - Returns: Encoded JSON
-    private func requestBodyFrom(params: FNHTTPParams?) -> Data? {
+    private func requestBodyFrom(params: WKHTTPParams?) -> Data? {
         guard let params = params else { return nil }
         guard let httpBody = try? JSONSerialization.data(withJSONObject: params, options: []) else {
             return nil
@@ -70,14 +70,14 @@ extension FNRequest {
     /// Generates a URLQueryItems array from a Params dictionary
     /// - Parameter params: HTTP Parameters dictionary
     /// - Returns: An Array of URLQueryItems
-    private func queryItemsFrom(params: FNHTTPParams?) -> [URLQueryItem]? {
+    private func queryItemsFrom(params: WKHTTPParams?) -> [URLQueryItem]? {
         guard let params = params else { return nil }
         return params.map {
             URLQueryItem(name: $0.key, value: $0.value as? String)
         }
     }
     
-    /// Transforms an FNRequest into a standard URL request
+    /// Transforms an WKRequest into a standard URL request
     /// - Parameter baseURL: API Base URL to be used
     /// - Returns: A ready to use URLRequest
     func asURLRequest(baseURL: String) -> URLRequest? {
@@ -88,9 +88,9 @@ extension FNRequest {
         var request = URLRequest(url: finalURL)
         request.httpMethod = method.rawValue
         request.httpBody = requestBodyFrom(params: body)
-        let defaultHeaders: FNHTTPHeaders = [
-            FNHTTPHeaderField.contentType.rawValue: contentType.rawValue,
-            FNHTTPHeaderField.acceptType.rawValue: contentType.rawValue
+        let defaultHeaders: WKHTTPHeaders = [
+            WKHTTPHeaderField.contentType.rawValue: contentType.rawValue,
+            WKHTTPHeaderField.acceptType.rawValue: contentType.rawValue
         ]
         request.allHTTPHeaderFields = defaultHeaders.merging(headers ?? [:], uniquingKeysWith: { (first, _) in first })
         return request

@@ -1,6 +1,6 @@
 //
-//  FNSessionDispatcherTests.swift
-//  FNNetworking
+//  WKSessionDispatcherTests.swift
+//  WireKit
 //
 //  Created by Daniel Bernal on 16/11/20.
 //  © 2020 - Les Mobiles
@@ -10,11 +10,11 @@
 
 import XCTest
 import Combine
-@testable import FNNetworking
+@testable import WireKit
 
-final class FNDispatcherTests: XCTestCase {
+final class WKDispatcherTests: XCTestCase {
     
-    typealias ArrayPublisher = AnyPublisher<[Todo], FNNetworkRequestError>
+    typealias ArrayPublisher = AnyPublisher<[Todo], WKNetworkRequestError>
     private var cancellables = [AnyCancellable]()
     
     func testDispatcherSuccess() {
@@ -37,7 +37,7 @@ final class FNDispatcherTests: XCTestCase {
             return (response, testData)
         }
         
-        let dispatcher = FNNetworkDispatcher(urlSession: TestHelpers.DummyURLSession())
+        let dispatcher = WKNetworkDispatcher(urlSession: TestHelpers.DummyURLSession())
         let request = URLRequest(url: url)
         let pub: ArrayPublisher = dispatcher.dispatch(request: request)
         pub.sink(receiveCompletion: { _ in },
@@ -63,13 +63,13 @@ final class FNDispatcherTests: XCTestCase {
                                                 headerFields: nil)!
             return (response, Data())
         }
-        let dispatcher = FNNetworkDispatcher(urlSession: TestHelpers.DummyURLSession())
+        let dispatcher = WKNetworkDispatcher(urlSession: TestHelpers.DummyURLSession())
         let request = URLRequest(url: url)
         let pub: ArrayPublisher = dispatcher.dispatch(request: request)
         pub.sink(receiveCompletion: { result in
             switch result {
                 case .failure(let error):
-                    XCTAssertEqual(error, FNNetworkRequestError.notFound)
+                    XCTAssertEqual(error, WKNetworkRequestError.notFound)
                     expectation.fulfill()
                 default:
                     break
@@ -99,13 +99,13 @@ final class FNDispatcherTests: XCTestCase {
                                                 headerFields: nil)!
             return (response, testData)
         }
-        let dispatcher = FNNetworkDispatcher(urlSession: TestHelpers.DummyURLSession())
+        let dispatcher = WKNetworkDispatcher(urlSession: TestHelpers.DummyURLSession())
         let request = URLRequest(url: url)
         let pub: ArrayPublisher = dispatcher.dispatch(request: request)
         pub.sink(receiveCompletion: { result in
                 switch result {
                 case .failure(let error):
-                    XCTAssertEqual(error, FNNetworkRequestError.decodingError)
+                    XCTAssertEqual(error, WKNetworkRequestError.decodingError)
                     expectation.fulfill()
                 default:
                     break

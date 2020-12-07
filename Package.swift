@@ -1,7 +1,7 @@
 // swift-tools-version:5.3
 //
 //  Package.swift
-//  FNNetwoking
+//  WireKit
 //
 //  © 2020 - Les Mobiles
 //  MIT License
@@ -9,7 +9,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "FNNetworking",
+    name: "WireKit",
     platforms: [
         .macOS(.v10_15),
         .iOS(.v13),
@@ -19,8 +19,8 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "FNNetworking",
-            targets: ["FNNetworking"]),
+            name: "WireKit",
+            targets: ["WireKit"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -30,11 +30,11 @@ let package = Package(
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
-            name: "FNNetworking",
+            name: "WireKit",
             dependencies: []),
         .testTarget(
-            name: "FNNetworkingTests",
-            dependencies: ["FNNetworking"],
+            name: "WireKitTests",
+            dependencies: ["WireKit"],
             resources: [.process("Resources")]),
             
     ]
