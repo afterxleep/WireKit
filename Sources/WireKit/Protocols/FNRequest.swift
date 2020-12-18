@@ -3,8 +3,6 @@
 //  FunctionalNetworking
 //
 //  Created by Daniel Bernal on 8/11/20.
-//  © 2020 - Les Mobiles
-//  MIT License
 //
 
 import Foundation
