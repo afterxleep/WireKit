@@ -2,17 +2,21 @@
 
 ### Define a Model, based on your Rest API
 
-Define your model, make sure it conform to Codable.
+Define your models, make sure they conforms to Codable.
 
 ``` swift
 import Foundation
 
-struct Todo: Codable, Identifiable {
+// Basic Todo Model
+struct Todo: Codable {
     let userId: Int
     let id: Int?
     let title: String
     let completed: Bool
 }
+
+// Empty Response Object -- To handle empty API responses
+struct Empty: Codable {}
 ```
 
 ### Define a set of WireKit requests
@@ -89,6 +93,7 @@ class YourModel {
     }
     
     init() {
+        // Initialize the API client
         apiClient = WKAPIClient(baseURL: Constants.apiURL)
         loadData()
     }
