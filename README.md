@@ -28,7 +28,7 @@ Versioning and support for other package managers (Cocoapods & Carthage) coming 
 ## Sample App
 The sample application is a simple Todo List app that leverages Wirekit to easily manage items.
 
-It's available in this Repo.
+It's available [in this Repo](https://github.com/afterxleep/WireKitSample).
 
 ## Usage
 
