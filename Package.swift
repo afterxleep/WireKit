@@ -3,8 +3,6 @@
 //  Package.swift
 //  WireKit
 //
-//  © 2020 - Les Mobiles
-//  MIT License
 
 import PackageDescription
 

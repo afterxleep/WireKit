@@ -3,8 +3,6 @@
 //  
 //
 //  Created by Daniel Bernal on 15/11/20.
-//  © 2020 - Les Mobiles
-//  MIT License
 //
 
 
@@ -86,6 +84,12 @@ public struct WKNetworkDispatcher {
         default:
             return .unknownError
         }
+    }
+    
+    private func debugMessage(_ message: String) {
+        #if DEBUG
+            print("--- WK Request \(message)")
+        #endif
     }
     
 }

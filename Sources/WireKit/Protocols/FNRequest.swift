@@ -3,8 +3,6 @@
 //  FunctionalNetworking
 //
 //  Created by Daniel Bernal on 8/11/20.
-//  © 2020 - Les Mobiles
-//  MIT License
 //
 
 import Foundation
@@ -49,6 +47,7 @@ public extension WKRequest {
     var queryParams: WKHTTPParams? { return nil }
     var body: WKHTTPParams? { return nil }
     var headers: WKHTTPHeaders? { return nil }
+    var debug: Bool { return false }
     
 }
 

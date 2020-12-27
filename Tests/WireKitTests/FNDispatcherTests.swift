@@ -3,8 +3,6 @@
 //  WireKit
 //
 //  Created by Daniel Bernal on 16/11/20.
-//  © 2020 - Les Mobiles
-//  MIT License
 //
 
 
