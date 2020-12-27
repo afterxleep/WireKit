@@ -2,7 +2,7 @@
 
 ### Define a Model, based on your Rest API
 
-Define your models, make sure they conforms to Codable.
+Define your models, make sure to conform to the Codable protocol.
 
 ``` swift
 // Basic Todo Model
