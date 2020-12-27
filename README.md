@@ -12,8 +12,8 @@ It's available in this Repo.
 
 ## Basic Use
 
-Check out the Quick Start guide [here](quickStart.md)
+Check out the Quick Start guide [here](docs/quickStart.md)
 
 ## WKRequest
 
-Futher documentation on WKRequest is available [here](wkrequest.md)
+Futher documentation on WKRequest is available [here](docs/wkrequest.md)
