@@ -5,8 +5,6 @@
 Define your models, make sure they conforms to Codable.
 
 ``` swift
-import Foundation
-
 // Basic Todo Model
 struct Todo: Codable {
     let userId: Int
