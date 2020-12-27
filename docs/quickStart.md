@@ -134,3 +134,6 @@ class YourModel {
 }
 
 ```
+
+## More advanced stuff
+For more advanced requests, incluiding Headers, Query parameters, and Body, checkout the [WKRequest documentation](wkrequest.md).
