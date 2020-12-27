@@ -21,7 +21,7 @@ WireKit is designed to facilitate consumption of RestFul APIs and takes care of 
 
 ### Swift Package Manager  
 
-The fastest way to install is via SPM.  Just add a new package using this repo URL and point it to the `main` branch.
+The fastest way to install is via SPM.  Just add a new package using this repo URL and point it to the current Major Version
 
 Versioning and support for other package managers (Cocoapods & Carthage) coming soon.
 
