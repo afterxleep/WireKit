@@ -86,4 +86,10 @@ public struct WKNetworkDispatcher {
         }
     }
     
+    private func debugMessage(_ message: String) {
+        #if DEBUG
+            print("--- WK Request \(message)")
+        #endif
+    }
+    
 }
