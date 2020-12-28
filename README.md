@@ -1,11 +1,11 @@
-![Swift](https://github.com/afterxleep/WireKit/workflows/Swift/badge.svg?branch=main)
-
 # WireKit
 
 
 A simple networking library based on Combine, Codable and URLSession publishers.
 
 WireKit is designed to facilitate consumption of RestFul APIs and takes care of fetching and decoding JSON data, gracefully handling errors so you can focus on what's important in your app.
+
+![Swift](https://github.com/afterxleep/WireKit/workflows/Swift/badge.svg?branch=main)
 
 ## Features
 - Super simple configuration
