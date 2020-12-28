@@ -1,3 +1,5 @@
+![Swift](https://github.com/afterxleep/WireKit/workflows/Swift/badge.svg?branch=main)
+
 # WireKit
 
 
