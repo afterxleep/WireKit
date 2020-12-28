@@ -1,6 +1,6 @@
-# WireKit
-
 ![Swift](https://github.com/afterxleep/WireKit/workflows/Swift/badge.svg?branch=main)
+
+# WireKit
 
 A simple networking library based on Combine, Codable and URLSession publishers.
 
