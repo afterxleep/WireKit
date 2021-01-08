@@ -37,8 +37,8 @@ final class WKAPIClientTests: XCTestCase {
         let dispatcher = WKNetworkDispatcher(urlSession: TestHelpers.DummyURLSession())
         let apiClient = WKAPIClient(baseURL: TestHelpers.URLs.baseURL, networkDispatcher: dispatcher)
         let expectation = XCTestExpectation(description: "Successful Data Load")
-        let pub: ArrayPublisher = apiClient.dispatch(Todo.API.FindAll())
-         pub            
+        let arrayPublisher: ArrayPublisher = apiClient.dispatch(Todo.API.FindAll())
+        arrayPublisher
             .sink(receiveCompletion: { _ in },
                   receiveValue: { value in
                     expectation.fulfill()

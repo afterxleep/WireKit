@@ -37,8 +37,8 @@ final class WKDispatcherTests: XCTestCase {
         
         let dispatcher = WKNetworkDispatcher(urlSession: TestHelpers.DummyURLSession())
         let request = URLRequest(url: url)
-        let pub: ArrayPublisher = dispatcher.dispatch(request: request)
-        pub.sink(receiveCompletion: { _ in },
+        let arrayPublisher: ArrayPublisher = dispatcher.dispatch(request: request)
+        arrayPublisher.sink(receiveCompletion: { _ in },
                  receiveValue: { value in
                     expectation.fulfill()
                 })
@@ -63,8 +63,8 @@ final class WKDispatcherTests: XCTestCase {
         }
         let dispatcher = WKNetworkDispatcher(urlSession: TestHelpers.DummyURLSession())
         let request = URLRequest(url: url)
-        let pub: ArrayPublisher = dispatcher.dispatch(request: request)
-        pub.sink(receiveCompletion: { result in
+        let arrayPublisher: ArrayPublisher = dispatcher.dispatch(request: request)
+        arrayPublisher.sink(receiveCompletion: { result in
             switch result {
                 case .failure(let error):
                     XCTAssertEqual(error, WKNetworkRequestError.notFound)
@@ -99,8 +99,8 @@ final class WKDispatcherTests: XCTestCase {
         }
         let dispatcher = WKNetworkDispatcher(urlSession: TestHelpers.DummyURLSession())
         let request = URLRequest(url: url)
-        let pub: ArrayPublisher = dispatcher.dispatch(request: request)
-        pub.sink(receiveCompletion: { result in
+        let arrayPublisher: ArrayPublisher = dispatcher.dispatch(request: request)
+        arrayPublisher.sink(receiveCompletion: { result in
                 switch result {
                 case .failure(let error):
                     XCTAssertEqual(error, WKNetworkRequestError.decodingError)

@@ -28,8 +28,8 @@ public struct WKAPIClient {
             return Fail(outputType: Request.ReturnType.self, failure: WKNetworkRequestError.badRequest).eraseToAnyPublisher()
             
         }
-        typealias Publisher = AnyPublisher<Request.ReturnType, WKNetworkRequestError>
-        let pub: Publisher = networkDispatcher.dispatch(request: urlRequest)
-        return pub.eraseToAnyPublisher()
+        typealias RequestPublisher = AnyPublisher<Request.ReturnType, WKNetworkRequestError>
+        let requestPublisher: RequestPublisher = networkDispatcher.dispatch(request: urlRequest)
+        return requestPublisher.eraseToAnyPublisher()
     }
 }
