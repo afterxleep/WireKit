@@ -2,17 +2,19 @@
 
 ### Define a Model, based on your Rest API
 
-Define your model, make sure it conforms to Codable and it matches your API JSON structure.
+Define your models, make sure to conform to the Codable protocol.
 
 ``` swift
-import Foundation
-
-struct Todo: Codable, Identifiable {
+// Basic Todo Model
+struct Todo: Codable {
     let userId: Int
     let id: Int?
     let title: String
     let completed: Bool
 }
+
+// Empty Response Object -- To handle empty API responses
+struct Empty: Codable {}
 ```
 
 ### Define a set of WireKit requests
@@ -34,17 +36,20 @@ struct TodoAPI {
     
     // Find all Todo Items
     struct FindAll: WKRequest {
+        // Return an array of 'Todo' items
         typealias ReturnType = [Todo]
         var path: String = APIConstants.path
     }
     
     // Delete item with ID
     struct Delete: WKRequest {
+        // Return an Empty object
         typealias ReturnType = Empty
         var path: String
         var method: WKHTTPMethod = .delete
         
         init(_ id: Int) {
+            // This translates into /todo/1
             path = "\(APIConstants.path)/\(id)"
         }
     }
@@ -52,6 +57,7 @@ struct TodoAPI {
     // Adds a new Item
     struct Add: WKRequest {
         var path: String = APIConstants.path
+        // Return a single of 'Todo' items
         typealias ReturnType = Todo
         var method: WKHTTPMethod = .post
         var body: WKHTTPParams?        
@@ -65,9 +71,9 @@ struct TodoAPI {
 
 ### Setup your APIClient and Perform a request
 
-Initialize your APIClient and use the internal `dispatch` function to dispatch a requests.
+Initialize your APIClient and use the internal `dispatch` function to dispatch a request.
 
-Since Wirekit relies on combine, and it automatically decodes API responses based on your defined Return Type, performin async requests is super simple.
+Since Wirekit relies on Combine, and it automatically decodes API responses based on your defined Return Type, performing async API requests is super simple.
 
 ``` swift
 
@@ -85,6 +91,7 @@ class YourModel {
     }
     
     init() {
+        // Initialize the API client
         apiClient = WKAPIClient(baseURL: Constants.apiURL)
         loadData()
     }
@@ -125,3 +132,6 @@ class YourModel {
 }
 
 ```
+
+## More advanced stuff
+For more advanced requests, incluiding Headers, Query parameters, and Body, checkout the [WKRequest documentation](wkrequest.md).
