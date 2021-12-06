@@ -37,7 +37,7 @@ final class WKDispatcherTests: XCTestCase {
         
         let dispatcher = WKNetworkDispatcher(urlSession: TestHelpers.DummyURLSession())
         let request = URLRequest(url: url)
-        let arrayPublisher: ArrayPublisher = dispatcher.dispatch(request: request)
+        let arrayPublisher: ArrayPublisher = dispatcher.dispatch(request: request, decoder: JSONDecoder())
         arrayPublisher.sink(receiveCompletion: { _ in },
                  receiveValue: { value in
                     expectation.fulfill()
@@ -63,7 +63,7 @@ final class WKDispatcherTests: XCTestCase {
         }
         let dispatcher = WKNetworkDispatcher(urlSession: TestHelpers.DummyURLSession())
         let request = URLRequest(url: url)
-        let arrayPublisher: ArrayPublisher = dispatcher.dispatch(request: request)
+        let arrayPublisher: ArrayPublisher = dispatcher.dispatch(request: request, decoder: JSONDecoder())
         arrayPublisher.sink(receiveCompletion: { result in
             switch result {
                 case .failure(let error):
@@ -99,7 +99,7 @@ final class WKDispatcherTests: XCTestCase {
         }
         let dispatcher = WKNetworkDispatcher(urlSession: TestHelpers.DummyURLSession())
         let request = URLRequest(url: url)
-        let arrayPublisher: ArrayPublisher = dispatcher.dispatch(request: request)
+        let arrayPublisher: ArrayPublisher = dispatcher.dispatch(request: request, decoder: JSONDecoder())
         arrayPublisher.sink(receiveCompletion: { result in
                 switch result {
                 case .failure(let error):

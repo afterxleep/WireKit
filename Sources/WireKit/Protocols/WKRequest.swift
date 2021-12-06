@@ -49,6 +49,7 @@ public extension WKRequest {
     var body: WKHTTPParams? { return nil }
     var headers: WKHTTPHeaders? { return nil }
     var debug: Bool { return false }
+    var decoder: JSONDecoder? { return JSONDecoder() }
     
 }
 
