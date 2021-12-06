@@ -37,6 +37,7 @@ public protocol WKRequest {
     var queryParams: WKHTTPParams? { get }
     var body: WKHTTPParams? { get }
     var headers: WKHTTPHeaders? { get }
+    var decoder: JSONDecoder? { get }
 }
  
 public extension WKRequest {

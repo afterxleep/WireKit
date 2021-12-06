@@ -26,10 +26,10 @@ public struct WKAPIClient {
     public func dispatch<Request: WKRequest>(_ request: Request) -> AnyPublisher<Request.ReturnType, WKNetworkRequestError> {
         guard let urlRequest = request.asURLRequest(baseURL: baseURL) else {
             return Fail(outputType: Request.ReturnType.self, failure: WKNetworkRequestError.badRequest).eraseToAnyPublisher()
-            
         }
+        
         typealias RequestPublisher = AnyPublisher<Request.ReturnType, WKNetworkRequestError>
-        let requestPublisher: RequestPublisher = networkDispatcher.dispatch(request: urlRequest)
+        let requestPublisher: RequestPublisher = networkDispatcher.dispatch(request: urlRequest, decoder: request.decoder)
         return requestPublisher.eraseToAnyPublisher()
     }
 }

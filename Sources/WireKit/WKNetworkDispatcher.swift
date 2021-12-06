@@ -34,8 +34,10 @@ public struct WKNetworkDispatcher {
     /// Dispatches an URLRequest and returns a publisher
     /// - Parameter request: URLRequest
     /// - Returns: A publisher with the provided decoded data or an error
-    public func dispatch<ReturnType: Codable>(request: URLRequest) -> AnyPublisher<ReturnType, WKNetworkRequestError> {
-        
+    public func dispatch<ReturnType: Codable>(request: URLRequest, decoder: JSONDecoder?) -> AnyPublisher<ReturnType, WKNetworkRequestError> {
+
+        let decoder = decoder ?? JSONDecoder()
+
         return urlSession
             .dataTaskPublisher(for: request)
             .tryMap({ data, response in
@@ -45,7 +47,7 @@ public struct WKNetworkDispatcher {
                 }
                 return data
             })
-            .decode(type: ReturnType.self, decoder: JSONDecoder())
+            .decode(type: ReturnType.self, decoder: decoder)
             .mapError { error in
                handleError(error)
             }
@@ -74,6 +76,7 @@ public struct WKNetworkDispatcher {
     /// - Parameter error: URLSession publisher error
     /// - Returns: Readable NWKNetworkRequestError
     private func handleError(_ error: Error) -> WKNetworkRequestError {
+        print(error)
         switch error {
         case is Swift.DecodingError:
             return .decodingError

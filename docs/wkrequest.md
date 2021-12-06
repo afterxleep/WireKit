@@ -23,3 +23,5 @@ All your API requests should go through `WKRequest`.  Here's the parameter list.
 ### Headers
 `[String: String]` - Dictionary of headers to be sent.  By default Wirekit automatically adds `Content-Type` and `Accept` headers so you don't have to manually addd them here.
 
+### Decoder
+`JSONDecoder` - Custom instance of JSONDecoder to be used then decoding this particular request.  This is useful to implement custom decoding strategies
