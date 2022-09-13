@@ -14,6 +14,8 @@ struct TestHelpers {
     enum TestPaths: String {
         case todos
         case todo
+        case malformed
+        case incorrect_format
     }
     
     enum URLs {
@@ -24,6 +26,7 @@ struct TestHelpers {
         static let httpVersion = "2.0"
         static let httpSuccess = 200
         static let httpnotFound = 404
+        static let httpError = 409
         static let requestTimeout = 1.0
     }
     

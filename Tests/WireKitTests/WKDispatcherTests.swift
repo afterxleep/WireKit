@@ -67,7 +67,7 @@ final class WKDispatcherTests: XCTestCase {
         arrayPublisher.sink(receiveCompletion: { result in
             switch result {
                 case .failure(let error):
-                    XCTAssertEqual(error, WKNetworkRequestError.notFound)
+                    XCTAssertEqual(error, WKNetworkRequestError.notFound(Data()))
                     expectation.fulfill()
                 default:
                     break
@@ -78,14 +78,50 @@ final class WKDispatcherTests: XCTestCase {
         wait(for: [expectation], timeout: TestHelpers.HTTPSettings.requestTimeout)
     }
     
-    func testDispatcherDecodingError() {
-        let expectation = XCTestExpectation(description: "Data decoding error")
+    func testDispatcherErrorWithData() {
+        let expectation = XCTestExpectation(description: "Data download error (404)")
         guard let url = URL(string: "\(TestHelpers.URLs.baseURL)") else {
             XCTFail()
             return
         }
         
         guard let testData = TestHelpers.loadTestData(from: TestHelpers.TestPaths.todo) else {
+            XCTFail()
+            return
+        }
+        
+        URLProtocolMock.requestHandler = { request in
+            let response = HTTPURLResponse.init(url: url,
+                                                statusCode: TestHelpers.HTTPSettings.httpError,
+                                                httpVersion: TestHelpers.HTTPSettings.httpVersion,
+                                                headerFields: nil)!
+            return (response, testData)
+        }
+        let dispatcher = WKNetworkDispatcher(urlSession: TestHelpers.DummyURLSession())
+        let request = URLRequest(url: url)
+        let arrayPublisher: ArrayPublisher = dispatcher.dispatch(request: request, decoder: JSONDecoder())
+        arrayPublisher.sink(receiveCompletion: { result in
+            switch result {
+                case .failure(let error):
+                XCTAssertEqual(error, WKNetworkRequestError.error4xx(409, data: testData))
+                    expectation.fulfill()
+                default:
+                    break
+                }
+            },
+            receiveValue: {_ in })
+        .store(in: &cancellables)
+        wait(for: [expectation], timeout: TestHelpers.HTTPSettings.requestTimeout)
+    }
+    
+    func testDispatcherDecodingMalformedError() {
+        let expectation = XCTestExpectation(description: "Data decoding error")
+        guard let url = URL(string: "\(TestHelpers.URLs.baseURL)") else {
+            XCTFail()
+            return
+        }
+        
+        guard let testData = TestHelpers.loadTestData(from: TestHelpers.TestPaths.malformed) else {
             XCTFail()
             return
         }
@@ -103,7 +139,43 @@ final class WKDispatcherTests: XCTestCase {
         arrayPublisher.sink(receiveCompletion: { result in
                 switch result {
                 case .failure(let error):
-                    XCTAssertEqual(error, WKNetworkRequestError.decodingError)
+                    XCTAssertEqual(error, WKNetworkRequestError.decodingError("The data couldn’t be read because it isn’t in the correct format."))
+                    expectation.fulfill()
+                default:
+                    break
+                }
+            },
+            receiveValue: {_ in })
+        .store(in: &cancellables)
+        wait(for: [expectation], timeout: TestHelpers.HTTPSettings.requestTimeout)
+    }
+    
+    func testDispatcherDecodingInvalidData() {
+        let expectation = XCTestExpectation(description: "Data decoding error")
+        guard let url = URL(string: "\(TestHelpers.URLs.baseURL)") else {
+            XCTFail()
+            return
+        }
+        
+        guard let testData = TestHelpers.loadTestData(from: TestHelpers.TestPaths.incorrect_format) else {
+            XCTFail()
+            return
+        }
+        
+        URLProtocolMock.requestHandler = { request in
+            let response = HTTPURLResponse.init(url: url,
+                                                statusCode: TestHelpers.HTTPSettings.httpSuccess,
+                                                httpVersion: TestHelpers.HTTPSettings.httpVersion,
+                                                headerFields: nil)!
+            return (response, testData)
+        }
+        let dispatcher = WKNetworkDispatcher(urlSession: TestHelpers.DummyURLSession())
+        let request = URLRequest(url: url)
+        let arrayPublisher: ArrayPublisher = dispatcher.dispatch(request: request, decoder: JSONDecoder())
+        arrayPublisher.sink(receiveCompletion: { result in
+            switch result {
+                case .failure(let error):
+                    XCTAssertEqual(error, WKNetworkRequestError.decodingError("The data couldn’t be read because it isn’t in the correct format."))
                     expectation.fulfill()
                 default:
                     break

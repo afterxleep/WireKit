@@ -10,17 +10,17 @@ import Combine
 import Foundation
 
 public enum WKNetworkRequestError: LocalizedError, Equatable {
-    case invalidRequest
-    case badRequest
-    case unauthorized
-    case forbidden
-    case notFound
-    case error4xx(_ code: Int)
-    case serverError
-    case error5xx(_ code: Int)
-    case decodingError
+    case invalidRequest(_ data: Data? = nil)
+    case badRequest(_ data: Data? = nil)
+    case unauthorized(_ data: Data? = nil)
+    case forbidden(_ data: Data? = nil)
+    case notFound(_ data: Data? = nil)
+    case error4xx(_ code: Int, data: Data? = nil)
+    case serverError(_ data: Data? = nil)
+    case error5xx(_ code: Int, data: Data? = nil)
+    case decodingError(_ description: String)
     case urlSessionFailed(_ error: URLError)
-    case unknownError
+    case unknownError(_ data: Data? = nil)
 }
 
 public struct WKNetworkDispatcher {
@@ -43,7 +43,7 @@ public struct WKNetworkDispatcher {
             .tryMap({ data, response in
                 if let response = response as? HTTPURLResponse,
                  !(200...299).contains(response.statusCode) {
-                    throw httpError(response.statusCode)
+                    throw httpError(response.statusCode, data: data)
                 }
                 return data
             })
@@ -58,34 +58,34 @@ public struct WKNetworkDispatcher {
     /// Parses a HTTP StatusCode and returns a proper error
     /// - Parameter statusCode: HTTP status code
     /// - Returns: Mapped Error
-    private func httpError(_ statusCode: Int) -> WKNetworkRequestError {
+    private func httpError(_ statusCode: Int, data: Data?) -> WKNetworkRequestError {
         switch statusCode {
-            case 400: return .badRequest
-            case 401: return .unauthorized
-            case 403: return .forbidden
-            case 404: return .notFound
-            case 402, 405...499: return .error4xx(statusCode)
-            case 500: return .serverError
-            case 501...599: return .error5xx(statusCode)
-            default: return .unknownError
+        case 400: return .badRequest(data)
+        case 401: return .unauthorized(data)
+        case 403: return .forbidden(data)
+        case 404: return .notFound(data)
+        case 402, 405...499: return .error4xx(statusCode, data: data)
+        case 500: return .serverError(data)
+        case 501...599: return .error5xx(statusCode, data: data)
+        default: return .unknownError(data)
         }
     }
+    
     
     
     /// Parses URLSession Publisher errors and return proper ones
     /// - Parameter error: URLSession publisher error
     /// - Returns: Readable NWKNetworkRequestError
     private func handleError(_ error: Error) -> WKNetworkRequestError {
-        print(error)
         switch error {
-        case is Swift.DecodingError:
-            return .decodingError
-        case let urlError as URLError:
-            return .urlSessionFailed(urlError)
+        case let error as DecodingError:
+            return .decodingError(error.localizedDescription)
+        case let error as URLError:
+            return .urlSessionFailed(error)
         case let error as WKNetworkRequestError:
             return error
         default:
-            return .unknownError
+            return .unknownError()
         }
     }
     
