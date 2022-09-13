@@ -370,7 +370,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:afterxleep/WireKit.git";
 			requirement = {
-				kind = upToNextMinorVersion;
+				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
 			};
 		};
