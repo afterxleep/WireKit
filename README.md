@@ -31,14 +31,12 @@ The fastest way to install is via SPM.  Just add a new package using this repo U
 Versioning and support for other package managers (Cocoapods & Carthage) coming soon.
 
 ## Sample App
-The sample application is a simple Todo List app that leverages Wirekit to easily manage items.
-
-It's available [in this Repo](https://github.com/afterxleep/WireKitSample).
+The [Example application](docs/docs/ExampleApp/) is a simple Todo List app that leverages Wirekit to easily fetch and manage items.
 
 ## Usage
 
-Check out the Quick Start guide [here](docs/quickStart.md)
+Check out the [Quick Start guide](docs/quickStart.md)
 
 ## WKRequest
 
-Futher documentation on WKRequest is available [here](docs/wkrequest.md)
+Futher documentation for advanced use of WKRequest is [also available.](docs/wkrequest.md)
