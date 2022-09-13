@@ -31,7 +31,7 @@ The fastest way to install is via SPM.  Just add a new package using this repo U
 Versioning and support for other package managers (Cocoapods & Carthage) coming soon.
 
 ## Sample App
-The [Example application](docs/docs/ExampleApp/) is a simple Todo List app that leverages Wirekit to easily fetch and manage items.
+The [Example application](docs/ExampleApp) is a simple Todo List app that leverages Wirekit to easily fetch and manage items.
 
 ## Usage
 
