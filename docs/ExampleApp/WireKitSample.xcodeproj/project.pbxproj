@@ -20,8 +20,8 @@
 		D6E759A329FD0A0D00E058E3 /* WireKitSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E759A229FD0A0D00E058E3 /* WireKitSampleTests.swift */; };
 		D6E759A929FD0A1300E058E3 /* TodoListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E7599A29FD09D800E058E3 /* TodoListViewModelTests.swift */; };
 		D6E759AD29FD14F800E058E3 /* todoItems.json in Resources */ = {isa = PBXBuildFile; fileRef = D6E759AC29FD14BB00E058E3 /* todoItems.json */; };
-		D6E759B329FD158E00E058E3 /* URLProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E759AA29FD0B4000E058E3 /* URLProtocolMock.swift */; };
 		D6E759B429FD168800E058E3 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E759B129FD156000E058E3 /* TestHelpers.swift */; };
+		D6E759B529FD1A3D00E058E3 /* URLProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E759AA29FD0B4000E058E3 /* URLProtocolMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,7 +102,6 @@
 				D68B255B257DD2560019B48A /* Assets.xcassets */,
 				D68B2560257DD2560019B48A /* Info.plist */,
 				D68B255D257DD2560019B48A /* Preview Content */,
-				D6E7599929FD09C000E058E3 /* Tests */,
 			);
 			path = WireKitSample;
 			sourceTree = "<group>";
@@ -125,20 +124,13 @@
 			path = TodoList;
 			sourceTree = "<group>";
 		};
-		D6E7599929FD09C000E058E3 /* Tests */ = {
+		D6E759A129FD0A0D00E058E3 /* WireKitSampleTests */ = {
 			isa = PBXGroup;
 			children = (
 				D6E759B129FD156000E058E3 /* TestHelpers.swift */,
 				D6E759AA29FD0B4000E058E3 /* URLProtocolMock.swift */,
 				D6E759AF29FD151000E058E3 /* TodoList */,
 				D6E759AE29FD14FC00E058E3 /* Sample Data */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
-		D6E759A129FD0A0D00E058E3 /* WireKitSampleTests */ = {
-			isa = PBXGroup;
-			children = (
 				D6E759A229FD0A0D00E058E3 /* WireKitSampleTests.swift */,
 			);
 			path = WireKitSampleTests;
@@ -267,7 +259,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6B466AF25980F4000695194 /* TodoAddView.swift in Sources */,
-				D6E759B329FD158E00E058E3 /* URLProtocolMock.swift in Sources */,
 				D68B255A257DD2550019B48A /* TodoListView.swift in Sources */,
 				D68B257A257DD7070019B48A /* TodoAPI.swift in Sources */,
 				D68B2558257DD2550019B48A /* WireKitSampleApp.swift in Sources */,
@@ -284,6 +275,7 @@
 				D6E759A929FD0A1300E058E3 /* TodoListViewModelTests.swift in Sources */,
 				D6E759A329FD0A0D00E058E3 /* WireKitSampleTests.swift in Sources */,
 				D6E759B429FD168800E058E3 /* TestHelpers.swift in Sources */,
+				D6E759B529FD1A3D00E058E3 /* URLProtocolMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

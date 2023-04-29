@@ -18,8 +18,7 @@ class TodoListViewModelTests: XCTestCase {
     func testListModelWorks() {
 
         // Note that we're using non SSL urls here as URLProtocol does
-        // to avoid SSL errors in URLSession
-        let url = URL(string: "http://jsonplaceholder.typicode.com/todos")
+        let url = URL(string: "https://jsonplaceholder.typicode.com/todos")
 
         // Get some test data from a file
         do {
@@ -37,8 +36,7 @@ class TodoListViewModelTests: XCTestCase {
         let session = URLSession(configuration: config)
 
         // Initialize the APIClient and pass along a custom dispatcher
-        // Note that we're using non SSL urls here as 
-        let baseURL = "http://jsonplaceholder.typicode.com"
+        let baseURL = "https://jsonplaceholder.typicode.com"
 
         // Then
         let dispatcher = WKNetworkDispatcher(urlSession: session)
@@ -52,7 +50,7 @@ class TodoListViewModelTests: XCTestCase {
                 XCTAssertGreaterThan(todoItems.count, 0, "Todo items should be loaded")
                 expectation.fulfill()
             }
-            wait(for: [expectation], timeout: 10)
+            wait(for: [expectation], timeout: 1)
     }
 
     deinit {
