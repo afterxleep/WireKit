@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TodoListView: View {
     
-    @StateObject var viewModel = TodoListViewModel()
+    @StateObject var viewModel: TodoListViewModel
     @State var showingAddForm: Bool = false
     
     var body: some View {
@@ -46,7 +46,7 @@ extension TodoListView {
                 action: { showingAddForm = true }) {
                 Image(systemName: "plus.circle").imageScale(.medium)
                 }.sheet(isPresented: $showingAddForm) {
-                    TodoAddView()
+                    TodoAddView(viewModel: viewModel)
                 }
             }
         }
@@ -61,12 +61,3 @@ extension TodoListView {
             }
     }
 }
-
-struct TodoListView_Previews: PreviewProvider {
-    static var previews: some View {
-        let viewModel = TodoListViewModel()
-        TodoListView(viewModel: viewModel,
-                     showingAddForm: false)
-    }
-}
-

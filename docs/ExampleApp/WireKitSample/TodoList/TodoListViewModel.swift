@@ -17,7 +17,7 @@ class TodoListViewModel: ObservableObject {
     @Published var title = "Todo List"
     @Published var loadingMessage = "Loading Data..."
     
-    private var apiClient: WKAPIClient
+    let apiClient: WKAPIClient
     private var cancellables = [AnyCancellable]()
     
     private enum Constants {
@@ -26,8 +26,8 @@ class TodoListViewModel: ObservableObject {
         static let defaultImage = "circle"
     }
     
-    init() {
-        apiClient = WKAPIClient(baseURL: Constants.apiURL)
+    init(apiClient: WKAPIClient) {
+        self.apiClient = apiClient
         loadData()
     }
     

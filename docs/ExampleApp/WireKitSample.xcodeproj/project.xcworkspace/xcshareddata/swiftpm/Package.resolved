@@ -1,14 +1,16 @@
 {
-  "pins" : [
-    {
-      "identity" : "wirekit",
-      "kind" : "remoteSourceControl",
-      "location" : "git@github.com:afterxleep/WireKit.git",
-      "state" : {
-        "revision" : "97c8ee70482ebf1883ca642621a066217f399c27",
-        "version" : "1.0.3"
+  "object": {
+    "pins": [
+      {
+        "package": "WireKit",
+        "repositoryURL": "git@github.com:afterxleep/WireKit.git",
+        "state": {
+          "branch": null,
+          "revision": "f9eecd8b1e84fa2d1616b00743d47200a84d69bf",
+          "version": "1.0.0"
+        }
       }
-    }
-  ],
-  "version" : 2
+    ]
+  },
+  "version": 1
 }

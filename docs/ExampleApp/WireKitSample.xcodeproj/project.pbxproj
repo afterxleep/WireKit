@@ -17,7 +17,22 @@
 		D6B466AA25980D2B00695194 /* WireKit in Frameworks */ = {isa = PBXBuildFile; productRef = D6B466A925980D2B00695194 /* WireKit */; };
 		D6B466AF25980F4000695194 /* TodoAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B466AE25980F4000695194 /* TodoAddView.swift */; };
 		D6C59FA6258C5D8700AAEDCF /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C59FA5258C5D8700AAEDCF /* Empty.swift */; };
+		D6E759A329FD0A0D00E058E3 /* WireKitSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E759A229FD0A0D00E058E3 /* WireKitSampleTests.swift */; };
+		D6E759A929FD0A1300E058E3 /* TodoListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E7599A29FD09D800E058E3 /* TodoListViewModelTests.swift */; };
+		D6E759AD29FD14F800E058E3 /* todoItems.json in Resources */ = {isa = PBXBuildFile; fileRef = D6E759AC29FD14BB00E058E3 /* todoItems.json */; };
+		D6E759B329FD158E00E058E3 /* URLProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E759AA29FD0B4000E058E3 /* URLProtocolMock.swift */; };
+		D6E759B429FD168800E058E3 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E759B129FD156000E058E3 /* TestHelpers.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D6E759A429FD0A0D00E058E3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D68B254C257DD2550019B48A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D68B2553257DD2550019B48A;
+			remoteInfo = WireKitSample;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		D68B2554257DD2550019B48A /* WireKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WireKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -31,6 +46,12 @@
 		D68B2579257DD7070019B48A /* TodoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAPI.swift; sourceTree = "<group>"; };
 		D6B466AE25980F4000695194 /* TodoAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAddView.swift; sourceTree = "<group>"; };
 		D6C59FA5258C5D8700AAEDCF /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
+		D6E7599A29FD09D800E058E3 /* TodoListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewModelTests.swift; sourceTree = "<group>"; };
+		D6E759A029FD0A0D00E058E3 /* WireKitSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WireKitSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6E759A229FD0A0D00E058E3 /* WireKitSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireKitSampleTests.swift; sourceTree = "<group>"; };
+		D6E759AA29FD0B4000E058E3 /* URLProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolMock.swift; sourceTree = "<group>"; };
+		D6E759AC29FD14BB00E058E3 /* todoItems.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = todoItems.json; sourceTree = "<group>"; };
+		D6E759B129FD156000E058E3 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +63,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D6E7599D29FD0A0D00E058E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -49,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				D68B2556257DD2550019B48A /* WireKitSample */,
+				D6E759A129FD0A0D00E058E3 /* WireKitSampleTests */,
 				D68B2555257DD2550019B48A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -57,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				D68B2554257DD2550019B48A /* WireKitSample.app */,
+				D6E759A029FD0A0D00E058E3 /* WireKitSampleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,6 +102,7 @@
 				D68B255B257DD2560019B48A /* Assets.xcassets */,
 				D68B2560257DD2560019B48A /* Info.plist */,
 				D68B255D257DD2560019B48A /* Preview Content */,
+				D6E7599929FD09C000E058E3 /* Tests */,
 			);
 			path = WireKitSample;
 			sourceTree = "<group>";
@@ -90,6 +121,41 @@
 				D68B2567257DD3000019B48A /* TodoListViewModel.swift */,
 				D68B2559257DD2550019B48A /* TodoListView.swift */,
 				D6B466AE25980F4000695194 /* TodoAddView.swift */,
+			);
+			path = TodoList;
+			sourceTree = "<group>";
+		};
+		D6E7599929FD09C000E058E3 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				D6E759B129FD156000E058E3 /* TestHelpers.swift */,
+				D6E759AA29FD0B4000E058E3 /* URLProtocolMock.swift */,
+				D6E759AF29FD151000E058E3 /* TodoList */,
+				D6E759AE29FD14FC00E058E3 /* Sample Data */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		D6E759A129FD0A0D00E058E3 /* WireKitSampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				D6E759A229FD0A0D00E058E3 /* WireKitSampleTests.swift */,
+			);
+			path = WireKitSampleTests;
+			sourceTree = "<group>";
+		};
+		D6E759AE29FD14FC00E058E3 /* Sample Data */ = {
+			isa = PBXGroup;
+			children = (
+				D6E759AC29FD14BB00E058E3 /* todoItems.json */,
+			);
+			path = "Sample Data";
+			sourceTree = "<group>";
+		};
+		D6E759AF29FD151000E058E3 /* TodoList */ = {
+			isa = PBXGroup;
+			children = (
+				D6E7599A29FD09D800E058E3 /* TodoListViewModelTests.swift */,
 			);
 			path = TodoList;
 			sourceTree = "<group>";
@@ -117,17 +183,39 @@
 			productReference = D68B2554257DD2550019B48A /* WireKitSample.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D6E7599F29FD0A0D00E058E3 /* WireKitSampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D6E759A629FD0A0D00E058E3 /* Build configuration list for PBXNativeTarget "WireKitSampleTests" */;
+			buildPhases = (
+				D6E7599C29FD0A0D00E058E3 /* Sources */,
+				D6E7599D29FD0A0D00E058E3 /* Frameworks */,
+				D6E7599E29FD0A0D00E058E3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D6E759A529FD0A0D00E058E3 /* PBXTargetDependency */,
+			);
+			name = WireKitSampleTests;
+			productName = WireKitSampleTests;
+			productReference = D6E759A029FD0A0D00E058E3 /* WireKitSampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		D68B254C257DD2550019B48A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1220;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1220;
 				TargetAttributes = {
 					D68B2553257DD2550019B48A = {
 						CreatedOnToolsVersion = 12.2;
+					};
+					D6E7599F29FD0A0D00E058E3 = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = D68B2553257DD2550019B48A;
 					};
 				};
 			};
@@ -148,6 +236,7 @@
 			projectRoot = "";
 			targets = (
 				D68B2553257DD2550019B48A /* WireKitSample */,
+				D6E7599F29FD0A0D00E058E3 /* WireKitSampleTests */,
 			);
 		};
 /* End PBXProject section */
@@ -162,6 +251,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D6E7599E29FD0A0D00E058E3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6E759AD29FD14F800E058E3 /* todoItems.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -170,6 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6B466AF25980F4000695194 /* TodoAddView.swift in Sources */,
+				D6E759B329FD158E00E058E3 /* URLProtocolMock.swift in Sources */,
 				D68B255A257DD2550019B48A /* TodoListView.swift in Sources */,
 				D68B257A257DD7070019B48A /* TodoAPI.swift in Sources */,
 				D68B2558257DD2550019B48A /* WireKitSampleApp.swift in Sources */,
@@ -179,7 +277,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D6E7599C29FD0A0D00E058E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6E759A929FD0A1300E058E3 /* TodoListViewModelTests.swift in Sources */,
+				D6E759A329FD0A0D00E058E3 /* WireKitSampleTests.swift in Sources */,
+				D6E759B429FD168800E058E3 /* TestHelpers.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D6E759A529FD0A0D00E058E3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D68B2553257DD2550019B48A /* WireKitSample */;
+			targetProxy = D6E759A429FD0A0D00E058E3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		D68B2561257DD2560019B48A /* Debug */ = {
@@ -342,6 +458,46 @@
 			};
 			name = Release;
 		};
+		D6E759A729FD0A0D00E058E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JM9222EF99;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.banshai.WireKitSampleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WireKitSample.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WireKitSample";
+			};
+			name = Debug;
+		};
+		D6E759A829FD0A0D00E058E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JM9222EF99;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.banshai.WireKitSampleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WireKitSample.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WireKitSample";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -363,6 +519,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		D6E759A629FD0A0D00E058E3 /* Build configuration list for PBXNativeTarget "WireKitSampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6E759A729FD0A0D00E058E3 /* Debug */,
+				D6E759A829FD0A0D00E058E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -370,7 +535,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:afterxleep/WireKit.git";
 			requirement = {
-				kind = upToNextMajorVersion;
+				kind = upToNextMinorVersion;
 				minimumVersion = 1.0.0;
 			};
 		};

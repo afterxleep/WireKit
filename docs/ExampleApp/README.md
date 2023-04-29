@@ -1,3 +1,4 @@
 # WireKit Sample App
 
-This is a quick demo app that fetches a random list of ToDos from a mock service and mocks additions.
+### This project is Archived.  
+The latest Wirekit Sample application is available of the [library documentation](https://github.com/afterxleep/WireKit/tree/main/docs/ExampleApp).

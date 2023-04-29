@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct TodoAddView: View {
-        
+    
     @Environment(\.presentationMode) var presentationMode
-    @StateObject var viewModel = TodoListViewModel()
+    @StateObject var viewModel: TodoListViewModel
     @State var todoText: String = ""
     
     var body: some View {
