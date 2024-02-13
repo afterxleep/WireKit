@@ -4,10 +4,9 @@
 
 ![Swift](https://github.com/afterxleep/WireKit/workflows/Swift/badge.svg?branch=main)
 
-A simple networking library based on Combine, Codable and URLSession publishers.
+A simple networking library using modern async/await and URLSession.
 
 WireKit is designed to facilitate consumption of RestFul APIs and takes care of fetching and decoding JSON data, gracefully handling errors so you can focus on what's important in your app.
-
 
 
 ## Features
@@ -18,9 +17,9 @@ WireKit is designed to facilitate consumption of RestFul APIs and takes care of 
 - Easy error handling
 
 ## Requirements
-- iOS 13+ / macOS 10.15+ / tvOS 13.0+ / watchOS 5.0+
-- Xcode 12+
-- Swift 5.3+
+- iOS 15+ / macOS 10.15+ / tvOS 13.0+ / watchOS 5.0+
+- Xcode 14+
+- Swift 5.5+
 
 ## Installation
 
