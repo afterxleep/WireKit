@@ -7,16 +7,11 @@
 
 import Foundation
 import XCTest
-import Combine
-import WireKit
 @testable import WireKitSample
 
 class TodoListViewModelTests: XCTestCase {
 
-    private var todoItemsCancellable: AnyCancellable?
-
-    func testListModelWorks() {
-
+    func testListModelWorks() async {
         // Note that we're using non SSL urls here as URLProtocol does
         let url = URL(string: "https://jsonplaceholder.typicode.com/todos")
 
@@ -26,6 +21,7 @@ class TodoListViewModelTests: XCTestCase {
             URLProtocolMock.testURLs = [url: jsonData]
         } catch {
             XCTFail("Error loading JSON data: \(error)")
+            return
         }
 
         // Use the Mock
@@ -37,25 +33,18 @@ class TodoListViewModelTests: XCTestCase {
 
         // Initialize the APIClient and pass along a custom dispatcher
         let baseURL = "https://jsonplaceholder.typicode.com"
-
-        // Then
         let dispatcher = WKNetworkDispatcher(urlSession: session)
         let apiClient = WKAPIClient(baseURL: baseURL, networkDispatcher: dispatcher)
 
-        let expectation = XCTestExpectation(description: "Wait for the response")
         let model = TodoListViewModel(apiClient: apiClient)
-        todoItemsCancellable = model.$todoItems
-            .dropFirst() // To skip the initial (empty) value
-            .sink { todoItems in
-                XCTAssertGreaterThan(todoItems.count, 0, "Todo items should be loaded")
-                expectation.fulfill()
-            }
-            wait(for: [expectation], timeout: 1)
-    }
 
-    deinit {
-        todoItemsCancellable?.cancel()
+        // Wait for the model to load data
+        let expectation = XCTestExpectation(description: "Wait for the response")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            XCTAssertGreaterThan(model.todoItems.count, 0, "Todo items should be loaded")
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 2)
     }
-
 }
-

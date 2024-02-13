@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -52,6 +52,7 @@
 		D6E759AA29FD0B4000E058E3 /* URLProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolMock.swift; sourceTree = "<group>"; };
 		D6E759AC29FD14BB00E058E3 /* todoItems.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = todoItems.json; sourceTree = "<group>"; };
 		D6E759B129FD156000E058E3 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
+		D6F8AC372B7AEBAD009F9E3F /* WireKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = WireKit; path = ../..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +77,7 @@
 		D68B254B257DD2550019B48A = {
 			isa = PBXGroup;
 			children = (
+				D6F8AC372B7AEBAD009F9E3F /* WireKit */,
 				D68B2556257DD2550019B48A /* WireKitSample */,
 				D6E759A129FD0A0D00E058E3 /* WireKitSampleTests */,
 				D68B2555257DD2550019B48A /* Products */,
@@ -413,7 +415,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"WireKitSample/Preview Content\"";
-				DEVELOPMENT_TEAM = JM9222EF99;
+				DEVELOPMENT_TEAM = 83QBHAG7HD;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = WireKitSample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -435,7 +437,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"WireKitSample/Preview Content\"";
-				DEVELOPMENT_TEAM = JM9222EF99;
+				DEVELOPMENT_TEAM = 83QBHAG7HD;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = WireKitSample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
