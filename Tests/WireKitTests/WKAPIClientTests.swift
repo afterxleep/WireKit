@@ -12,39 +12,37 @@ import Combine
 
 final class WKAPIClientTests: XCTestCase {
     
-    private var cancellables = [AnyCancellable]()
-    typealias ArrayPublisher = AnyPublisher<[Todo], WKNetworkRequestError>
-    
-    func testRequest() {
+    final class WKAPIClientTests: XCTestCase {
         
-        guard let testData = TestHelpers.loadTestData(from: TestHelpers.TestPaths.todos) else {
-            XCTFail()
-            return
+        func testRequest() async {
+            guard let testData = TestHelpers.loadTestData(from: TestHelpers.TestPaths.todos) else {
+                XCTFail()
+                return
+            }
+            
+            guard let url = URL(string: "\(TestHelpers.URLs.baseURL)") else {
+                XCTFail()
+                return
+            }
+            
+            URLProtocolMock.requestHandler = { request in
+                let response = HTTPURLResponse(url: url,
+                                               statusCode: TestHelpers.HTTPSettings.httpSuccess,
+                                               httpVersion: TestHelpers.HTTPSettings.httpVersion,
+                                               headerFields: nil)!
+                return (response, testData)
+            }
+            let dispatcher = WKNetworkDispatcher(urlSession: TestHelpers.DummyURLSession())
+            let apiClient = WKAPIClient(baseURL: TestHelpers.URLs.baseURL, networkDispatcher: dispatcher)
+            
+            do {
+                let _: [Todo] = try await apiClient.dispatch(Todo.API.FindAll())
+                // If we reach this point, the request was successful
+            } catch {
+                XCTFail("Request failed with error: \(error)")
+            }
         }
-        
-        guard let url = URL(string: "\(TestHelpers.URLs.baseURL)") else {
-            XCTFail()
-            return
-        }
-        
-        URLProtocolMock.requestHandler = { request in
-            let response = HTTPURLResponse.init(url: url,
-                                                statusCode: TestHelpers.HTTPSettings.httpSuccess,
-                                                httpVersion: TestHelpers.HTTPSettings.httpVersion,
-                                                headerFields: nil)!
-            return (response, testData)
-        }
-        let dispatcher = WKNetworkDispatcher(urlSession: TestHelpers.DummyURLSession())
-        let apiClient = WKAPIClient(baseURL: TestHelpers.URLs.baseURL, networkDispatcher: dispatcher)
-        let expectation = XCTestExpectation(description: "Successful Data Load")
-        let arrayPublisher: ArrayPublisher = apiClient.dispatch(Todo.API.FindAll())
-        arrayPublisher
-            .sink(receiveCompletion: { _ in },
-                  receiveValue: { value in
-                    expectation.fulfill()
-                })
-            .store(in: &cancellables)
-        
     }
+
     
 }

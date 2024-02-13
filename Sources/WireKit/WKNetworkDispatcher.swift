@@ -33,25 +33,28 @@ public struct WKNetworkDispatcher {
     
     /// Dispatches an URLRequest and returns a publisher
     /// - Parameter request: URLRequest
-    /// - Returns: A publisher with the provided decoded data or an error
-    public func dispatch<ReturnType: Codable>(request: URLRequest, decoder: JSONDecoder?) -> AnyPublisher<ReturnType, WKNetworkRequestError> {
-
+    /// - Returns: A genery return type
+    public func dispatch<ReturnType: Codable>(request: URLRequest, decoder: JSONDecoder?) async throws -> ReturnType {
         let decoder = decoder ?? JSONDecoder()
 
-        return urlSession
-            .dataTaskPublisher(for: request)
-            .tryMap({ data, response in
-                if let response = response as? HTTPURLResponse,
-                 !(200...299).contains(response.statusCode) {
-                    throw httpError(response.statusCode, data: data)
-                }
-                return data
-            })
-            .decode(type: ReturnType.self, decoder: decoder)
-            .mapError { error in
-               handleError(error)
+        do {
+            let (data, response) = try await urlSession.data(for: request)
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw WKNetworkRequestError.unknownError(data)
             }
-            .eraseToAnyPublisher()
+            
+            guard (200...299).contains(httpResponse.statusCode) else {
+                throw httpError(httpResponse.statusCode, data: data)
+            }
+
+            do {
+                return try decoder.decode(ReturnType.self, from: data)
+            } catch {
+                throw WKNetworkRequestError.decodingError(error.localizedDescription)
+            }
+        } catch {
+            throw handleError(error)
+        }
     }
     
     

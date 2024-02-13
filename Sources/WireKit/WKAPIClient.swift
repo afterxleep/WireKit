@@ -22,14 +22,11 @@ public struct WKAPIClient {
     
     /// Dispatches an WKRequest and returns a publisher
     /// - Parameter request: WKRequest to Dispatch
-    /// - Returns: A publisher containing decoded data or an error
-    public func dispatch<Request: WKRequest>(_ request: Request) -> AnyPublisher<Request.ReturnType, WKNetworkRequestError> {
-        guard let urlRequest = request.asURLRequest(baseURL: baseURL) else {
-            return Fail(outputType: Request.ReturnType.self, failure: WKNetworkRequestError.badRequest()).eraseToAnyPublisher()
+    /// - Returns: The generic return typ
+    public func dispatch<Request: WKRequest>(_ request: Request) async throws -> Request.ReturnType {
+            guard let urlRequest = request.asURLRequest(baseURL: baseURL) else {
+                throw WKNetworkRequestError.badRequest()
+            }
+            return try await networkDispatcher.dispatch(request: urlRequest, decoder: request.decoder)
         }
-        
-        typealias RequestPublisher = AnyPublisher<Request.ReturnType, WKNetworkRequestError>
-        let requestPublisher: RequestPublisher = networkDispatcher.dispatch(request: urlRequest, decoder: request.decoder)
-        return requestPublisher.eraseToAnyPublisher()
-    }
 }
