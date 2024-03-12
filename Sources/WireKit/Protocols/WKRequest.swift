@@ -37,6 +37,7 @@ public protocol WKRequest {
     var queryParams: WKHTTPParams? { get }
     var body: WKHTTPParams? { get }
     var headers: WKHTTPHeaders? { get }
+    var timeout: TimeInterval? { get }
     var decoder: JSONDecoder? { get }
 }
  
@@ -49,6 +50,7 @@ public extension WKRequest {
     var body: WKHTTPParams? { return nil }
     var headers: WKHTTPHeaders? { return nil }
     var debug: Bool { return false }
+    var timeout: TimeInterval? { return nil }
     var decoder: JSONDecoder? { return JSONDecoder() }
     
 }
@@ -93,6 +95,9 @@ extension WKRequest {
             WKHTTPHeaderField.contentType.rawValue: contentType.rawValue,
             WKHTTPHeaderField.acceptType.rawValue: contentType.rawValue
         ]
+        if let timeoutInterval = timeout {
+            request.timeoutInterval = timeoutInterval
+        }
         request.allHTTPHeaderFields = defaultHeaders.merging(headers ?? [:], uniquingKeysWith: { (first, _) in first })
         return request
     }

@@ -33,7 +33,7 @@ public struct WKNetworkDispatcher {
     
     /// Dispatches an URLRequest and returns a publisher
     /// - Parameter request: URLRequest
-    /// - Returns: A genery return type
+    /// - Returns: A generic return type
     public func dispatch<ReturnType: Codable>(request: URLRequest, decoder: JSONDecoder?) async throws -> ReturnType {
         let decoder = decoder ?? JSONDecoder()
 
@@ -49,7 +49,7 @@ public struct WKNetworkDispatcher {
 
             do {
                 return try decoder.decode(ReturnType.self, from: data)
-            } catch {
+            } catch(let error) {                
                 throw WKNetworkRequestError.decodingError(error.localizedDescription)
             }
         } catch {

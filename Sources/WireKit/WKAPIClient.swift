@@ -22,7 +22,7 @@ public struct WKAPIClient {
     
     /// Dispatches an WKRequest and returns a publisher
     /// - Parameter request: WKRequest to Dispatch
-    /// - Returns: The generic return typ
+    /// - Returns: The generic return type
     public func dispatch<Request: WKRequest>(_ request: Request) async throws -> Request.ReturnType {
             guard let urlRequest = request.asURLRequest(baseURL: baseURL) else {
                 throw WKNetworkRequestError.badRequest()
